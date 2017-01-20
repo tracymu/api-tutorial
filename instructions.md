@@ -62,7 +62,7 @@ An example of JSON
 => "1975"
 ```
 
-# Let's build something using an API!
+## Let's build something using an API
 
 We're going to build a small rails app to get information from the OMDB API via a search box and display the results.
 
@@ -95,7 +95,7 @@ Run your server, and you can visit those routes:
 
 e.g. http://localhost:3000/movies/search
 
-** Insert image of what they're supposed to see at this point **
+![placeholder](placeholder.png)
 
 This is the page where we want to put in our search box. So, open that view in your editor and read this page of the [Rails Guides](http://guides.rubyonrails.org/form_helpers.html#a-generic-search-form) to learn about making a simple search form.
 
@@ -108,8 +108,8 @@ The form might look like this:
   <%= submit_tag("Search") %>
 <% end %>
 ```
-
-** show what the form would look like **
+Which makes a simple search box
+![search box](search-box.png?raw=true)
 
 ### Make a request to the OMDB API
 In your movies controller, add the following lines to the `search` method.
@@ -159,7 +159,8 @@ Finally, let's render our show page
 ### Let's show the results
 
 If you try your app out in the browser, you'll notice your movies show page needs to be changed to show the list of movies.
-** Show that view **
+
+![movie list](movie-list.png)
 
 Find the show view and replace the code in there with:
 
