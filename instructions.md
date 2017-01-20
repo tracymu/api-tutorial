@@ -1,10 +1,8 @@
-#Let's have fun with API's
+#Let's learn about API's
 
-This lesson is to learn about API's - Application Programming Interfaces. Once you know how to use API's, you can get access to information from public platforms like Twitter, Instagram, Flickr, Weather apps, IMDB, Tinder and more.
+This lesson is to learn about API's - Application Program Interfaces. Once you know how to use API's, you can get access to information from public platforms like Twitter, Instagram, Flickr, Weather apps, IMDB, Tinder and more.
 
-Many websites and apps have APIs that the public can access to retrieve information.
-
-These are some of the things people have made using publicly available APIs
+These are some of the things people have made using publicly available APIs **(let's put something interesting here)**
 
 ## What is an API?
 
@@ -53,7 +51,7 @@ It is a way of sending information between a browser and a server, and has the f
 
 An online [JSON editor](http://www.jsoneditoronline.org/) can be handy to both read JSON more easily and check that JSON you have written is formatted correctly. 
 
-For the JSON
+An example of JSON
 
 ```
 @our_json = {"Title":"Dog Day Afternoon","Year":"1975","Rated":"R"}
@@ -68,7 +66,7 @@ For the JSON
 
 We're going to build a small rails app to get information from the OMDB API via a search box and display the results.
 
-First set up a simple rails app.
+### Set up a simple rails app
 
 If you don't recall the steps, they are:
  - make a new directory where you want your app to be saved
@@ -79,21 +77,25 @@ If you don't recall the steps, they are:
 
 You have a basic rails app set up!
 
+### Add functionality specific to this app
+
 To write some methods for searching and displaying movies, we will need a controller, let's call it the movies controller.
 
-There are two actions we want to have this controller do - search for movies and show movies, so let's include those names in the generate command so that those methods will be created for us.
+There are two actions we want to have this controller do - search for movies and show movies - so let's include those names in the generate command so that those methods will be created for us.
 
 (Don't forget to stop your server or open a new tab for your app to run commands).
 
-Generate a rails controller with `rails generate controller movies search show`
+`rails generate controller movies search show`
 
 Have a look to see what additional files have been added to your app by this command. 
 
-If you look in the `config/routes.rb` file, you will see it has added 2 routes for you.
+If you look in the `config/routes.rb` file, you will see it has also added 2 routes for you.
 
 Run your server, and you can visit those routes:
 
 e.g. http://localhost:3000/movies/search
+
+** Insert image of what they're supposed to see at this point **
 
 This is the page where we want to put in our search box. So, open that view in your editor and read this page of the [Rails Guides](http://guides.rubyonrails.org/form_helpers.html#a-generic-search-form) to learn about making a simple search form.
 
@@ -107,17 +109,16 @@ The form might look like this:
 <% end %>
 ```
 
-You will need one more route to make this form work, so add it to your routes file:
-`post 'movies/search'`
+** show what the form would look like **
 
+### Make a request to the OMDB API
 In your movies controller, add the following lines to the `search` method.
 
 `return unless @title = params[:q]`
 This line will save your search term as a variable called `@title` (if a search term was entered)
 
 `uri = URI.parse("http://www.omdbapi.com/?s=#{ @title }")`
-
-This line creates the URL you want to request, note we are interpolating the `@title` in the url as the value of the `s` key.
+This line creates the URL you want to request. Note we are interpolating the `@title` in the url as the value of the `s` key.
 
 ```
 http =  Net::HTTP.new(uri.host, uri.port)
@@ -125,40 +126,42 @@ http =  Net::HTTP.new(uri.host, uri.port)
 ```
 These lines send the request to the API, and save the results of the request as `@results`
 
-The result comes back looking like this
+The result comes back looking like this:
 ```
 "{\"Search\":[{\"Title\":\"Dog Day Afternoon\", ...
 ```
 
-This is (??? what is it before it needs to be parsed?)
+### Parse the API results
 
-So to get it into nice JSON, we need to parse it, which will remove all the backslashes. 
+**This is (??? what do you call this is it before it needs to be parsed?)**
+
+So to get it into nice JSON, we need to parse it, which will remove all the backslashes. Add the following line into your `search` method
 
 `@movies = JSON.parse(@results.body)`
 
-`@movies` will now be JSON like:
+`@movies` will now look like this JSON:
 ```
 {"Search"=>[{"Title"=>"Dog Day Afternoon", "Year"=>"1975", ... }, { Title"=>"Alpha Dog", "Year"=>"2006", "imdbID"=>"tt0426883" ... }, ...]
 ```
 
-You can now see that `@movies` has a key of `Search`, whose value is an array of movies. Each movie has a Title, Year, etc.
+You can see that `@movies` has a key of `Search`, whose value is an array of movies. Each movie has a Title, Year, etc.
 
-Let's just change our last line to only return the array of movies. To do that, you specify the key 'Search'
+Let's change that last line in our `search` method to only return the array of movies. To do that, you specify the key 'Search'
 
 `@movies = JSON.parse(@results.body)["Search"]`
 
 [NOTE: If you are interested in what the `@movies` object looks like, ask an instructor about using a debugger]
 
-
 Finally, let's render our show page 
 
 `render('movies/show')`
 
+### Let's show the results
 
-If you try this out in the browser, you'll notice your movies show page needs to be changed to show the list of movies.
+If you try your app out in the browser, you'll notice your movies show page needs to be changed to show the list of movies.
+** Show that view **
 
-
-Find the show view and add some code:
+Find the show view and replace the code in there with:
 
 ```
 <h1>Movies Found</h1>
@@ -171,9 +174,11 @@ Find the show view and add some code:
 
 This code includes a loop, which will loop through each of the movies and pull out the value for the ['Title'] key.
 
+** show a pic of what it will look like **
+
 ### Now Try
 
- - Try displaying other movie attributes on your show page
+ - Try displaying other movie attributes on your show page ** We will need to show them how to use the debugger to inspect the results**
  - Try adding other attributes to your form - for example year the movie was made
 
 
