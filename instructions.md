@@ -181,12 +181,12 @@ This code includes a loop, which will loop through each of the movies and pull o
 
  - Try displaying other movie attributes on your show page ** We will need to show them how to use the debugger to inspect the results**
  - Try adding other attributes to your form - for example year the movie was made
-
+ - Make the search page the root page of your app to make it easy to find
 
 ### Other tutorials:
 
 
- - make a list of movies. (i.e. making a model and saving a list)
+ - [Save a list of your favourite movies](/favourites_list.md)
  - twitter api 
  - make it pretty 
  - geoff to do a weather one?
