@@ -1,8 +1,3 @@
----
-layout: default
-title: Let's learn about API's
----
-
 #Let's learn about API's
 
 This lesson is to learn about API's - Application Program Interfaces. Once you know how to use API's, you can get access to information from public platforms like Twitter, Instagram, Flickr, Weather apps, IMDB, Tinder and more.
@@ -100,7 +95,7 @@ Run your server, and you can visit those routes:
 
 e.g. http://localhost:3000/movies/search
 
-![placeholder](images/placeholder.png)
+![placeholder](placeholder.png)
 
 This is the page where we want to put in our search box. So, open that view in your editor and read this page of the [Rails Guides](http://guides.rubyonrails.org/form_helpers.html#a-generic-search-form) to learn about making a simple search form.
 
@@ -165,7 +160,7 @@ Finally, let's render our show page
 
 If you try your app out in the browser, you'll notice your movies show page needs to be changed to show the list of movies.
 
-![movie list](images/movie-list.png)
+![movie list](movie-list.png)
 
 Find the show view and replace the code in there with:
 
@@ -191,7 +186,7 @@ This code includes a loop, which will loop through each of the movies and pull o
 ### Other tutorials:
 
 
- - [Save a list of your favourite movies](favourites_list)
+ - [Save a list of your favourite movies](/favourites_list.md)
  - twitter api
  - make it pretty
  - geoff to do a weather one?
