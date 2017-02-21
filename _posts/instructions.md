@@ -16,7 +16,7 @@ There are two main parts to a request for information from the Open Movie Databa
 1. The URL to send all requests to
 2. The parameters you include on the end of the URL
 
-Parameters are included in a url after a `?` and are passed in as pairs. A parameter has a key and a value. The keys accepted by the OMDB API are listed on the API instructions page. These are the list of things you can ask the API for information about. 
+Parameters are included in a url after a `?` and are passed in as pairs. A parameter has a key and a value. The keys accepted by the OMDB API are listed on the API instructions page. These are the list of things you can ask the API for information about.
 
 e.g. if you include the parameter key `s` that means you are searching for a title.
 
@@ -27,7 +27,7 @@ The value of the parameter is what you pass in as the search term. For example, 
 You can include multiple parameters, separating them with `&`
 
 e.g. the OMDB API allows you to request the year of the movie with `y`
-So your request for Dog movies from 2012 would be 
+So your request for Dog movies from 2012 would be
 
 `http://www.omdbapi.com/?t=dog&y=2012`
 
@@ -49,14 +49,14 @@ It is a way of sending information between a browser and a server, and has the f
  - Name and value are separated by colons, `:`
  - Name-value pairs are separated by commas `,`
 
-An online [JSON editor](http://www.jsoneditoronline.org/) can be handy to both read JSON more easily and check that JSON you have written is formatted correctly. 
+An online [JSON editor](http://www.jsoneditoronline.org/) can be handy to both read JSON more easily and check that JSON you have written is formatted correctly.
 
 An example of JSON
 
 ```
 @our_json = {"Title":"Dog Day Afternoon","Year":"1975","Rated":"R"}
 
-@our_json["Title"] 
+@our_json["Title"]
 => "Dog Day Afternoon"
 @our_json["Year"]
 => "1975"
@@ -87,7 +87,7 @@ There are two actions we want to have this controller do - search for movies and
 
 `rails generate controller movies search show`
 
-Have a look to see what additional files have been added to your app by this command. 
+Have a look to see what additional files have been added to your app by this command.
 
 If you look in the `config/routes.rb` file, you will see it has also added 2 routes for you.
 
@@ -152,7 +152,7 @@ Let's change that last line in our `search` method to only return the array of m
 
 [NOTE: If you are interested in what the `@movies` object looks like, ask an instructor about using a debugger]
 
-Finally, let's render our show page 
+Finally, let's render our show page
 
 `render('movies/show')`
 
@@ -187,8 +187,8 @@ This code includes a loop, which will loop through each of the movies and pull o
 
 
  - [Save a list of your favourite movies](/favourites_list.md)
- - twitter api 
- - make it pretty 
+ - twitter api
+ - make it pretty
  - geoff to do a weather one?
  - javascript module - e.g. carousel
  - other available apis to work on  - list
