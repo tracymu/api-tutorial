@@ -3,7 +3,7 @@ layout: default
 title: Let's learn about API's
 ---
 
-#Let's learn about API's
+# Let's learn about API's
 
 This lesson is to learn about API's - Application Program Interfaces. Once you know how to use API's, you can get access to information from public platforms like Twitter, Instagram, Flickr, Weather apps, IMDB, Tinder and more.
 
@@ -114,7 +114,7 @@ The form might look like this:
 <% end %>
 ```
 Which makes a simple search box
-![search box](search-box.png?raw=true)
+![search box](images/search-box.png?raw=true)
 
 ### Make a request to the OMDB API
 In your movies controller, add the following lines to the `search` method.
