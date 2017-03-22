@@ -5,11 +5,17 @@ title: Let's learn about API's
 
 # Let's learn about API's
 
-This lesson is to learn about API's - Application Program Interfaces. Once you know how to use API's, you can get access to information from public platforms like Twitter, Instagram, Flickr, Weather apps, IMDB, Tinder and more.
-
-These are some of the things people have made using publicly available APIs **(let's put something interesting here)**
-
 ## What is an API?
+This lesson is to learn about API's - Application Program Interfaces. API’s allow your product or service to talk to another product or service. They are used to give people access to your data from outside the firewall. This means you are allowing your products data and functionality to be used by other developers.
+
+API’s are used to integrate websites and systems with other websites such as Twitter, Facebook and Ebay. An example of an API is Google Maps. By creating a HTML page and adding a few lines of javascript, you are able to have a google map in your application. Once you have integrated a basic map, you can add additional features such as custom markers and popups. All of this can be done without having to download or maintain a large library of code. Instead, Google takes care of maintaining the map so you only need to think about how you want to use it in your application.
+
+![](/images/api-diagram.png)
+
+If something goes wrong in an API request, an error or a warning will be thrown. Warnings are thrown for non-fatal conditions such as invalid parameters, whereas errors are only thrown for fatal conditions. These warnings and errors are called HTTP status codes. Some common status codes include:
+
+![](/images/http-status-codes.png)
+[Click here to see full list of HTTP status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 
 
 ### An API request
