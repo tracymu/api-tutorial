@@ -62,6 +62,12 @@ It is a way of sending information between a browser and a server, and has the f
 
 An online [JSON editor](http://www.jsoneditoronline.org/) can be handy to both read JSON more easily and check that JSON you have written is formatted correctly.
 
+This is a simplified example of JSON that might be returned by the OMDB:
+
+```json
+{"Title": "Dog Day Afternoon", "Year": "1975", "Rated": "R"}
+```
+
 An example of JSON in the interactive Ruby prompt `irb`. (`p` means "print")
 
 ```ruby
@@ -83,19 +89,19 @@ Output:
 
 ### Quiz
 
-Which of these is JSON? A:
+Which of these is JSON?
 
 ```plain
 {"Title": "Dog Day Afternoon", "Year": "1975", "Rated": "R"}
 ```
     
-or B:
+or
 
 ```plain
 {"Title"=>"Dog Day Afternoon", "Year"=>"1975", "Rated"=>"R"}
 ```
     
-What is the other version, if not JSON?
+What is the other version, if not JSON? Ask the person next to you or an instructor if you're not sure.
 
 
 ## Let's build something using an API
@@ -107,8 +113,8 @@ We're going to build a small rails app to get information from the OMDB API via 
 1. Make a new directory where you want your app to be saved.
 
 ```
-mkdir ~/projects
-cd ~/projects
+mkdir projects
+cd projects
 ```
 
 2. Inside that directory make a new rails project.
@@ -185,15 +191,37 @@ There are two actions we want to have this controller do
 
 so let's include those names in the generate command so that those methods will be created for us.
 
-(It's easiest to leave your Rails server running and open a new prompt to run this command.)
+(It's easiest to leave your Rails server running and open a new Terminal or Command Prompt window to run this command. Just make sure you're in the directory where your rails server is. You might have to `cd projects/movies`)
 
 ```
-rails generate controller movies search show
+rails generate controller movies search
+```
+
+This means "Hey Rails, make a new controller called movies with a method called search".
+
+Output:
+
+```
+      create  app/controllers/movies_controller.rb
+       route  get 'movies/search'
+      invoke  erb
+      create    app/views/movies
+      create    app/views/movies/search.html.erb
+      invoke  test_unit
+      create    test/controllers/movies_controller_test.rb
+      invoke  helper
+      create    app/helpers/movies_helper.rb
+      invoke    test_unit
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/movies.coffee
+      invoke    scss
+      create      app/assets/stylesheets/movies.scss
 ```
 
 Have a look to see what additional files have been added to your app by this command.
 
-If you look in the `config/routes.rb` file, you will see it has also added 2 routes for you.
+If you look in the `config/routes.rb` file, you will see it has also added a route for you.
 
 Run your server, and you can visit those routes:
 
@@ -203,92 +231,119 @@ e.g. [http://localhost:3000/movies/search](http://localhost:3000/movies/search)
 
 This is the page where we want to put in our search box. So, open that view in your editor and read this page of the [Rails Guides](http://guides.rubyonrails.org/form_helpers.html#a-generic-search-form) to learn about making a simple search form.
 
-The form might look like this:
+Add this code to your template file:
 
-```
-<%= form_tag(controller: "movies", action: "search", method: "get") do %>
-  <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag(:q) %>
-  <%= submit_tag("Search") %>
+```erb
+<%= form_tag(movies_search_path, method: :get) do %>
+    <%= label_tag(:q, "Search for:") %>
+    <%= text_field_tag(:q) %>
+    <%= submit_tag("Search") %>
 <% end %>
 ```
-Which makes a simple search box
+
+Which makes a simple search box that looks like this:
+
 ![search box](images/search-box.png?raw=true)
 
 ### Make a request to the OMDB API
-In your movies controller, add the following lines to the `search` method.
 
-`return unless @title = params[:q]`
-This line will save your search term as a variable called `@title` (if a search term was entered)
+In your movies controller, update the `search` method.
 
-`uri = URI.parse("http://www.omdbapi.com/?s=#{ @title }")`
-This line creates the URL you want to request. Note we are interpolating the `@title` in the url as the value of the `s` key.
+```ruby
+def search
+  q = params[:q]
+  return unless q.present?
 
+  require 'net/http'
+  uri = URI.parse("http://www.omdbapi.com/?" + { s: q }.to_query)
+  json = Net::HTTP.get(uri)
+end
 ```
-http =  Net::HTTP.new(uri.host, uri.port)
-@results = http.get(uri.request_uri)
-```
-These lines send the request to the API, and save the results of the request as `@results`
 
-The result comes back looking like this:
-```
-"{\"Search\":[{\"Title\":\"Dog Day Afternoon\", ...
+This will save your search term as a variable called `q`, create the URL you want to request, and perform the HTTP request to the API, storing the results in the variable `results`.
+
+The last two steps are the same as what your web browser was doing earlier, except now this Ruby code is behaving like a web browser and saving the page to a variable.
+
+The result comes back looking like it did in the web browser:
+
+```plain
+{"Search":[{"Title":"Dog Day Afternoon","Year":"1975", ... }]}
 ```
 
 ### Parse the API results
 
-**This is (??? what do you call this is it before it needs to be parsed?)**
+The API result comes back as one giant string. This string is formatted as JSON. It has the information we need but our Ruby code needs to know how to break it apart into little keys and values so we can get the bits of information we want.
 
-So to get it into nice JSON, we need to parse it, which will remove all the backslashes. Add the following line into your `search` method
+To do this, we "parse" it. In programming, parsing means interpreting a formatted string into a data structure we can use. Rails comes with the `JSON` library ready to go, so we can just use that. Add the following line into your `search` method:
 
-`@movies = JSON.parse(@results.body)`
-
-`@movies` will now look like this JSON:
+```ruby
+@results = JSON.parse(json)
 ```
+
+This takes the big JSON-formatted string that the API sent us and turns it into a Ruby data structure we can work with. The Ruby data structure will look like this:
+
+```ruby
 {"Search"=>[{"Title"=>"Dog Day Afternoon", "Year"=>"1975", ... }, { Title"=>"Alpha Dog", "Year"=>"2006", "imdbID"=>"tt0426883" ... }, ...]
 ```
 
-You can see that `@movies` has a key of `Search`, whose value is an array of movies. Each movie has a Title, Year, etc.
+You can see that `@results` has a key of `Search`, whose value is an array of movies. Each movie has a Title, Year, etc.
 
-Let's change that last line in our `search` method to only return the array of movies. To do that, you specify the key 'Search'
+Let's change that last line in our `search` method to only return the array of movies. To do that, you specify the key `"Search"`
 
-`@movies = JSON.parse(@results.body)["Search"]`
+```ruby
+@results = JSON.parse(json)["Search"]
+```
 
-[NOTE: If you are interested in what the `@movies` object looks like, ask an instructor about using a debugger]
+[NOTE: If you are interested in what the `@results` object looks like, ask an instructor about using a debugger]
 
-Finally, let's render our show page
+This is what the code looks like now:
 
-`render('movies/show')`
+```ruby
+class MoviesController < ApplicationController
+  def search
+    # Avoid requesting info from API if there was no search query
+    q = params[:q]
+    return unless q.present?
+
+    # Request info from API
+    require 'net/http'
+    uri = URI.parse("http://www.omdbapi.com/?" + { s: q }.to_query)
+    json = Net::HTTP.get(uri)
+
+    # Turn JSON-formatted string into Ruby data structure and make it available to the view
+    @results = JSON.parse(json)["Search"]
+  end
+end
+```
 
 ### Let's show the results
 
-If you try your app out in the browser, you'll notice your movies show page needs to be changed to show the list of movies.
+We'd like to show the list of results in HTML like this:
 
 ![movie list](images/movie-list.png)
 
-Find the show view and replace the code in there with:
+Find the `search.html.erb` view file and add the code:
 
+```erb
+<% if @results.present? %>
+  <h1>Movies Found</h1>
+  <ul>
+    <% @results.each do |movie| %>
+      <li><%= movie["Title"] %></li>
+    <% end %>
+  </ul>
+<% end %>
 ```
-<h1>Movies Found</h1>
-<ul>
-  <% @movies.each do |movie| %>
-    <li><%= movie['Title'] %></li>
-  <% end %>
-</ul>
-```
 
-This code includes a loop, which will loop through each of the movies and pull out the value for the ['Title'] key.
+This code includes a loop, which will loop through each of the movies and pull out the value for the `"Title"` key.
 
-** show a pic of what it will look like **
+### Now try
 
-### Now Try
-
- - Try displaying other movie attributes on your show page ** We will need to show them how to use the debugger to inspect the results**
- - Try adding other attributes to your form - for example year the movie was made
- - Make the search page the root page of your app to make it easy to find
+ - What happens when you replace `<li><%= movie["Title"] %></li>` with `<li><%= movie %></li>`?
+ - Can you display movie attributes other than the title?
+ - Can you add a `text_field_tag(:year)` to your form and update your controller so it searches by year also?
 
 ### Other tutorials:
-
 
  - [Save a list of your favourite movies](favourites_list)
  - twitter api
