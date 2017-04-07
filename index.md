@@ -104,24 +104,92 @@ We're going to build a small rails app to get information from the OMDB API via 
 
 ### Set up a simple rails app
 
-If you don't recall the steps, they are:
- - make a new directory where you want your app to be saved
- - inside that directory `rails new your-app-name`
- - `cd your-app-name`
- - `rails s`
- - view your app on http://localhost:3000
+1. Make a new directory where you want your app to be saved.
 
-You have a basic rails app set up!
+```
+mkdir ~/projects
+cd ~/projects
+```
+
+2. Inside that directory make a new rails project.
+
+```
+rails new movies
+```
+
+Its output will look something like this:
+
+```
+      create
+      create  README.md
+      create  Rakefile
+      create  config.ru
+      create  .gitignore
+      create  Gemfile
+      create  app
+      create  app/assets/config/manifest.js
+      create  app/assets/javascripts/application.js
+
+... (abbreviated!) ...
+
+Using coffee-rails 4.2.1
+Using jquery-rails 4.3.1
+Using web-console 3.5.0
+Using rails 5.0.2
+Using sass-rails 5.0.6
+Bundle complete! 15 Gemfile dependencies, 62 gems now installed.
+Use `bundle show [gemname]` to see where a bundled gem is installed.
+         run  bundle exec spring binstub --all
+* bin/rake: spring inserted
+* bin/rails: spring inserted`
+```
+
+3. Run your new project.
+
+```
+cd movies
+rails s
+```
+
+Output:
+
+```
+=> Booting Puma
+=> Rails 5.0.2 application starting in development on http://localhost:3000
+=> Run `rails server -h` for more startup options
+Puma starting in single mode...
+* Version 3.8.2 (ruby 2.4.0-p0), codename: Sassy Salamander
+* Min threads: 5, max threads: 5
+* Environment: development
+* Listening on tcp://localhost:3000
+Use Ctrl-C to stop
+```
+
+4. View your app
+
+Open [http://localhost:3000](http://localhost:3000) in a web browser.
+
+You should see this image:
+
+![](/images/new-rails.png)
+
 
 ### Add functionality specific to this app
 
 To write some methods for searching and displaying movies, we will need a controller, let's call it the movies controller.
 
-There are two actions we want to have this controller do - search for movies and show movies - so let's include those names in the generate command so that those methods will be created for us.
+There are two actions we want to have this controller do
 
-(Don't forget to stop your server or open a new tab for your app to run commands).
+- search for movies and
+- show movies,
 
-`rails generate controller movies search show`
+so let's include those names in the generate command so that those methods will be created for us.
+
+(It's easiest to leave your Rails server running and open a new prompt to run this command.)
+
+```
+rails generate controller movies search show
+```
 
 Have a look to see what additional files have been added to your app by this command.
 
