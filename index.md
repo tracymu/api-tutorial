@@ -33,14 +33,14 @@ e.g. if you include the parameter key `s` that means you are searching for a tit
 
 The value of the parameter is what you pass in as the search term. For example, if you're looking for movies with 'dog' in the title, you will append the key and value to the end of the url like this:
 
-`http://www.omdbapi.com/?t=dog`
+[http://www.omdbapi.com/?t=dog](http://www.omdbapi.com/?t=dog)
 
 You can include multiple parameters, separating them with `&`
 
 e.g. the OMDB API allows you to request the year of the movie with `y`
 So your request for Dog movies from 2012 would be
 
-`http://www.omdbapi.com/?t=dog&y=2012`
+[http://www.omdbapi.com/?t=dog&y=2012](http://www.omdbapi.com/?t=dog&y=2012)
 
 
 **To do:** Play around with the OMDB API page watching the changes in the request URL and the response. Build versions of these URLs yourself and play with them in your browser.
@@ -129,7 +129,7 @@ If you look in the `config/routes.rb` file, you will see it has also added 2 rou
 
 Run your server, and you can visit those routes:
 
-e.g. http://localhost:3000/movies/search
+e.g. [http://localhost:3000/movies/search](http://localhost:3000/movies/search)
 
 ![placeholder](images/placeholder.png)
 
