@@ -31,14 +31,14 @@ Parameters are included in a url after a `?` and are passed in as pairs. A param
 
 e.g. if you include the parameter key `s` that means you are searching for a title.
 
-The value of the parameter is what you pass in as the search term. For example, if you're looking for movies with 'dog' in the title, you will append the key and value to the end of the url like this:
+The value of the parameter is what you pass in as the search term. For example, if you're looking for movies with "dog" in the title, you will append the key and value to the end of the url like this:
 
 [http://www.omdbapi.com/?t=dog](http://www.omdbapi.com/?t=dog)
 
 You can include multiple parameters, separating them with `&`
 
 e.g. the OMDB API allows you to request the year of the movie with `y`
-So your request for Dog movies from 2012 would be
+So your request for "dog" movies from "2012" would be
 
 [http://www.omdbapi.com/?t=dog&y=2012](http://www.omdbapi.com/?t=dog&y=2012)
 
@@ -72,7 +72,7 @@ An example of JSON in the interactive Ruby prompt `irb`. (`p` means "print")
 
 ```ruby
 require 'json'
-a = %({"Title": "Dog Day Afternoon", "Year": "1975", "Rated": "R"})
+a = '{"Title": "Dog Day Afternoon", "Year": "1975", "Rated": "R"}'
 b = JSON.parse(a)
 p b
 p b["Title"]
@@ -89,19 +89,22 @@ Output:
 
 ### Quiz
 
-Which of these is JSON?
+- Which of these is JSON?
 
-```plain
-{"Title": "Dog Day Afternoon", "Year": "1975", "Rated": "R"}
-```
-    
-or
+  ```plain
+  {"Title": "Dog Day Afternoon", "Year": "1975", "Rated": "R"}
+  ```
 
-```plain
-{"Title"=>"Dog Day Afternoon", "Year"=>"1975", "Rated"=>"R"}
-```
+  or
+
+  ```plain
+  {"Title"=>"Dog Day Afternoon", "Year"=>"1975", "Rated"=>"R"}
+  ```
     
-What is the other version, if not JSON? Ask the person next to you or an instructor if you're not sure.
+- What is the other version, if not JSON?
+- In the Ruby code example above, what is the type of the variable `a`? What is the type of the variable `b`?
+
+Ask the person next to you or an instructor if you're not sure.
 
 
 ## Let's build something using an API
@@ -219,9 +222,19 @@ Output:
       create      app/assets/stylesheets/movies.scss
 ```
 
+We only really care about `search.html.erb` and `movies_controller.rb` in this tutorial. You can ignore the rest.
+
 Have a look to see what additional files have been added to your app by this command.
 
 If you look in the `config/routes.rb` file, you will see it has also added a route for you.
+
+```ruby
+Rails.application.routes.draw do
+  get 'movies/search'
+
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+end
+```
 
 Run your server, and you can visit those routes:
 
@@ -286,9 +299,9 @@ This takes the big JSON-formatted string that the API sent us and turns it into 
 {"Search"=>[{"Title"=>"Dog Day Afternoon", "Year"=>"1975", ... }, { Title"=>"Alpha Dog", "Year"=>"2006", "imdbID"=>"tt0426883" ... }, ...]
 ```
 
-You can see that `@results` has a key of `Search`, whose value is an array of movies. Each movie has a Title, Year, etc.
+You can see that `@results` has a key of `"Search"`, whose value is an array. Each movie has a `"Title"`, `"Year"`, etc.
 
-Let's change that last line in our `search` method to only return the array of movies. To do that, you specify the key `"Search"`
+Let's change that last line in our search method to only return the array of movies. To do that, we specify the key `"Search"`.
 
 ```ruby
 @results = JSON.parse(json)["Search"]
@@ -322,7 +335,7 @@ We'd like to show the list of results in HTML like this:
 
 ![movie list](images/movie-list.png)
 
-Find the `search.html.erb` view file and add the code:
+Find the `search.html.erb` view file and add this code to the end:
 
 ```erb
 <% if @results.present? %>
@@ -346,8 +359,10 @@ This code includes a loop, which will loop through each of the movies and pull o
 ### Other tutorials:
 
  - [Save a list of your favourite movies](favourites_list)
- - twitter api
+ - Twitter api
  - make it pretty
  - geoff to do a weather one?
  - javascript module - e.g. carousel
  - other available apis to work on  - list
+ - do this exact same exercise but with front-end JavaScript code using jQuery and AJAX.
+
