@@ -1,14 +1,14 @@
 ---
 layout: default
-title: Let's learn about API's
+title: Let's learn about APIs
 ---
 
-# Let's learn about API's
+# Let's learn about APIs
 
 ## What is an API?
-This lesson is to learn about API's - Application Program Interfaces. API’s allow your product or service to talk to another product or service. They are used to give people access to your data from outside the firewall. This means you are allowing your products data and functionality to be used by other developers.
+This lesson is to learn about APIs - Application Program Interfaces. APIs allow your product or service to talk to another product or service. They are used to give people access to your data from outside the firewall. This means you are allowing your products data and functionality to be used by other developers.
 
-API’s are used to integrate websites and systems with other websites such as Twitter, Facebook and Ebay. An example of an API is Google Maps. By creating a HTML page and adding a few lines of javascript, you are able to have a google map in your application. Once you have integrated a basic map, you can add additional features such as custom markers and popups. All of this can be done without having to download or maintain a large library of code. Instead, Google takes care of maintaining the map so you only need to think about how you want to use it in your application.
+APIs are used to integrate websites and systems with other websites such as Twitter, Facebook and Ebay. An example of an API is Google Maps. By creating a HTML page and adding a few lines of javascript, you are able to have a google map in your application. Once you have integrated a basic map, you can add additional features such as custom markers and popups. All of this can be done without having to download or maintain a large library of code. Instead, Google takes care of maintaining the map so you only need to think about how you want to use it in your application.
 
 ![](/images/api-diagram.png)
 
@@ -47,7 +47,7 @@ So your request for Dog movies from 2012 would be
 
 ### An API response
 
-This API gives you a choice of format for the response - either XML or JSON. Other API's might provide responses in other formats (e.g. SOAP). Today we will be focussing on JSON.
+This API gives you a choice of format for the response - either XML or JSON. Other APIs might provide responses in other formats (e.g. SOAP). Today we will be focussing on JSON.
 
 #### Understanding JSON
 
