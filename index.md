@@ -8,7 +8,7 @@ title: Let's learn about APIs
 ## What is an API?
 This lesson is to learn about APIs - Application Program Interfaces. APIs allow your product or service to talk to another product or service. They are used to give people access to your data from outside the firewall. This means you are allowing your products data and functionality to be used by other developers.
 
-APIs are used to integrate websites and systems with other websites such as Twitter, Facebook and Ebay. An example of an API is Google Maps. By creating a HTML page and adding a few lines of javascript, you are able to have a google map in your application. Once you have integrated a basic map, you can add additional features such as custom markers and popups. All of this can be done without having to download or maintain a large library of code. Instead, Google takes care of maintaining the map so you only need to think about how you want to use it in your application.
+APIs are used to integrate websites and systems with other websites such as Twitter, Facebook and eBay. An example of an API is Google Maps. By creating a HTML page and adding a few lines of JavaScript, you are able to have a Google map in your application. Once you have integrated a basic map, you can add additional features such as custom markers and popups. All of this can be done without having to download or maintain a large library of code. Instead, Google takes care of maintaining the map so you only need to think about how you want to use it in your application.
 
 ![](/images/api-diagram.png)
 
@@ -62,16 +62,41 @@ It is a way of sending information between a browser and a server, and has the f
 
 An online [JSON editor](http://www.jsoneditoronline.org/) can be handy to both read JSON more easily and check that JSON you have written is formatted correctly.
 
-An example of JSON
+An example of JSON in the interactive Ruby prompt `irb`. (`p` means "print")
 
+```ruby
+require 'json'
+a = %({"Title": "Dog Day Afternoon", "Year": "1975", "Rated": "R"})
+b = JSON.parse(a)
+p b
+p b["Title"]
+p b["Year"]
 ```
-@our_json = {"Title":"Dog Day Afternoon","Year":"1975","Rated":"R"}
 
-@our_json["Title"]
-=> "Dog Day Afternoon"
-@our_json["Year"]
-=> "1975"
+Output:
+
+```ruby
+{"Title"=>"Dog Day Afternoon", "Year"=>"1975", "Rated"=>"R"}
+"Dog Day Afternoon"
+"1975"
 ```
+
+### Quiz
+
+Which of these is JSON? A:
+
+```plain
+{"Title": "Dog Day Afternoon", "Year": "1975", "Rated": "R"}
+```
+    
+or B:
+
+```plain
+{"Title"=>"Dog Day Afternoon", "Year"=>"1975", "Rated"=>"R"}
+```
+    
+What is the other version, if not JSON?
+
 
 ## Let's build something using an API
 
