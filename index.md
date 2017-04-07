@@ -47,7 +47,7 @@ So your request for Dog movies from 2012 would be
 
 ### An API response
 
-This API gives you a choice of format for the response - either XML or JSON. Other APIs might provide responses in other formats (e.g. SOAP). Today we will be focussing on JSON.
+APIs can give you a choice of format for the response. OMDB gives us either XML or JSON. Today we will be focusing on JSON.
 
 #### Understanding JSON
 
