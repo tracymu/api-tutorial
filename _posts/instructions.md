@@ -1,6 +1,6 @@
-#Let's learn about API's
+#Let's learn about APIs
 
-This lesson is to learn about API's - Application Program Interfaces. Once you know how to use API's, you can get access to information from public platforms like Twitter, Instagram, Flickr, Weather apps, IMDB, Tinder and more.
+This lesson is to learn about APIs - Application Program Interfaces. Once you know how to use APIs, you can get access to information from public platforms like Twitter, Instagram, Flickr, Weather apps, IMDB, Tinder and more.
 
 These are some of the things people have made using publicly available APIs **(let's put something interesting here)**
 
@@ -36,7 +36,7 @@ So your request for Dog movies from 2012 would be
 
 ### An API response
 
-This API gives you a choice of format for the response - either XML or JSON. Other API's might provide responses in other formats (e.g. SOAP). Today we will be focussing on JSON.
+This API gives you a choice of format for the response - either XML or JSON. Other APIs might provide responses in other formats (e.g. SOAP). Today we will be focussing on JSON.
 
 #### Understanding JSON
 

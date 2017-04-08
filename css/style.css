@@ -307,3 +307,9 @@ kbd {
     line-height: 1.5em;
     white-space: nowrap;
 }
+
+
+p > img {
+  margin: auto;
+  display: block;
+}
