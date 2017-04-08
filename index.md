@@ -6,13 +6,16 @@ title: Let's learn about APIs
 # Let's learn about APIs
 
 ## What is an API?
-This lesson is to learn about APIs - Application Program Interfaces. APIs allow your product or service to talk to another product or service. They are used to give people access to your data from outside the firewall. This means you are allowing your products data and functionality to be used by other developers.
 
-APIs are used to integrate websites and systems with other websites such as Twitter, Facebook and eBay. An example of an API is Google Maps. By creating a HTML page and adding a few lines of JavaScript, you are able to have a Google map in your application. Once you have integrated a basic map, you can add additional features such as custom markers and popups. All of this can be done without having to download or maintain a large library of code. Instead, Google takes care of maintaining the map so you only need to think about how you want to use it in your application.
+APIs stands for "Application Program Interfaces". APIs are web sites and protocols that allow you to incorporate rich and interesting data and features into your websites. In this tutorial, we're going to use an API to search a database for your favourite movies.
+
+## Why learn APIs?
+
+Teaching you how to use APIs will let you write much more interesting websites full of content from the web. Other examples of powerful things you can do with APIs include using existing accounts like Facebook or GitHub to log into your website conveniently, providing relevant related photos from Flickr or Instagram, and showing data laid out on a map. For example, it only takes a few lines of JavaScript to [add a Google map in your application](https://developers.google.com/maps/documentation/javascript/adding-a-google-map). By using a map API like Google's, Google takes care of the complicated map functionality, leaving you to focus on just the functionality of your own application.
 
 ![](/images/api-diagram.png)
 
-If something goes wrong in an API request, an error or a warning will be thrown. Warnings are thrown for non-fatal conditions such as invalid parameters, whereas errors are only thrown for fatal conditions. These warnings and errors are called HTTP status codes. Some common status codes include:
+Your website will request information from an API using HTTP in much the same way as a web browser requests HTML using HTTP. If it goes right, you'll get data back. If something goes wrong in an API request it will return an error. For example, if you search for a non-existent record id, the API may return a 404 error (and you may have to display a nice error message to the person using your website saying you couldn't find what they were looking for). Reading over HTTP return codes can give you a feel of all the things that might go wrong if you're not careful. Some common status codes include:
 
 ![](/images/http-status-codes.png)
 [Click here to see full list of HTTP status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
