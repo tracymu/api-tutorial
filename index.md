@@ -90,7 +90,7 @@ Output:
 "1975"
 ```
 
-### Quiz
+### Checkpoint
 
 - Which of these is JSON?
 
@@ -104,10 +104,9 @@ Output:
   {"Title"=>"Dog Day Afternoon", "Year"=>"1975", "Rated"=>"R"}
   ```
     
-- What is the other version, if not JSON?
-- In the Ruby code example above, what is the type of the variable `a`? What is the type of the variable `b`?
-
-Ask the person next to you or an instructor if you're not sure.
+- In the Ruby code example above, what is the type of the variable `a`? What is the type of the variable `b`? (You can check your answer by entering `a.class` or `b.class` into `irb`.)
+- Why do we have two versions of the same data?
+- If you guessed wrong or didn't know, ask the person next to you or an instructor.
 
 
 ## Let's build something using an API
@@ -352,6 +351,16 @@ Find the `search.html.erb` view file and add this code to the end:
 ```
 
 This code includes a loop, which will loop through each of the movies and pull out the value for the `"Title"` key.
+
+### Checkpoint
+
+- Get a piece of paper and draw boxes on it, leaving some space around them. Label them:
+  - Browser
+  - Rails app
+  - OMDB API
+- Starting at Browser, imagine somebody presses the Search button. Now draw arrows connecting the boxes, illustrating what happens, in order from start to finish. Each arrow should represent some information or communication such as an HTTP request, or a response to an HTTP request.
+- Label the arrows and try to describe what information is being passed. Parameters? JSON?
+- Compare your diagram to the person next to you and discuss any differences.
 
 ### Now try
 
