@@ -371,10 +371,10 @@ This code includes a loop, which will loop through each of the movies and pull o
 ### Other tutorials:
 
  - [Compare favourite movies with a friend](compare-favourite-movies)
+ - [Try it again but in JavaScript](omdb-javascript)
  - Twitter api
  - make it pretty
  - geoff to do a weather one?
  - javascript module - e.g. carousel
  - other available apis to work on  - list
- - do this exact same exercise but with front-end JavaScript code using jQuery and AJAX.
 
