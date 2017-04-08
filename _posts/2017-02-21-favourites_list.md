@@ -33,7 +33,7 @@ rails db:migrate
 
 Visit [http://localhost:3000/favourites/](http://localhost:3000/favourites/) and you should see that Rails has written the basic functionality for us, allowing us to list, create, edit and delete "favourite" records.
 
-![](images/fav-movies-add-form.png)
+![Add form]({{ site.url }}/images/fav-movies-add-form.png)
 
 It's not very convenient yet, but it works. Let's revise our to do list.
 
@@ -90,7 +90,7 @@ Add a file named `app/views/favourites/search.html.erb` similar to the last exer
 <% end %>
 ```
 
-![](images/fav-movies-search1.png)
+![Search page version 1]({{ site.url }}/images/fav-movies-search1.png)
 
 How do we save a search result to our database? Rails has many ways. Let's pick one.
 
@@ -122,11 +122,11 @@ And add a button next to each search result that will "post" the search result b
 
 `&#9829;` is an "HTML entity" which is jargon for a character or glyph, in this case a symbol.
 
-![](images/fav-movies-search2.png)
+![Search page version 2]({{ site.url }}/images/fav-movies-search2.png)
 
 And after clicking the little button:
 
-![](images/fav-movies-added.png)
+![Added from search]({{ site.url }}/images/fav-movies-added.png)
 
 Put a link on the index to our search page. Add this at the bottom of `app/views/favourites/index.html.erb`:
 
@@ -207,7 +207,7 @@ Now let's add a `compare` method anywhere inside the class in `app/controllers/f
 
 I'll leave you to figure out how to show each person's list of favourite movies although if you get stuck, check the `search.html.erb` file. This is how mine looks:
 
-![](images/fav-movies-compare1.png)
+![Compare page version 1]({{ site.url }}/images/fav-movies-compare1.png)
 
 The last thing we want to do is highlight the favourite movies these two people have in common. Since you've come this far, I'm not going to tell you everything, but I'll give you one strategy that will work:
 
@@ -229,7 +229,7 @@ Then add some CSS to visually distinguish the shared movies.
 
 This is what mine ended up looking like:
 
-![](images/fav-movies-compare2.png)
+![Compare page version 2]({{ site.url }}/images/fav-movies-compare2.png)
 
 Look at all the things we did today:
 
