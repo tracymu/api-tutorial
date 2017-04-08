@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Favourites
-permalink: favourites_list
+title: Compare Favourite Movies
+permalink: compare-favourite-movies
 ---
 
 # Let's compare our favourite movies

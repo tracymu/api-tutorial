@@ -370,7 +370,7 @@ This code includes a loop, which will loop through each of the movies and pull o
 
 ### Other tutorials:
 
- - [Save a list of your favourite movies](favourites_list)
+ - [Compare favourite movies with a friend](compare-favourite-movies)
  - Twitter api
  - make it pretty
  - geoff to do a weather one?
