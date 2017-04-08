@@ -231,10 +231,20 @@ This is what mine ended up looking like:
 
 ![](images/fav-movies-compare2.png)
 
+Look at all the things we did today:
 
-### Next steps:
+* ~~use our movie search functionality to look up movies~~
+* ~~create a database where we can build up a collection of movies we like~~
+* ~~integrate our search functionality to add movies easily to this database~~
+* ~~add a page that shows us two people's favourite movie collections, highlighting those in common~~
+
+### Next steps
+
+We've focused on getting something working, not doing it attractively, elegantly or efficiently. Now that it works, there's much we could improve.
 
 - The suggested list of shared IDs could be made more efficient by replacing the array with a different data structure. Which method called on the array is inefficient? What data structure has a faster equivalent of this method?
 - Everything is pretty ugly. Even 10 minutes of CSS will probably make everything more useable.
-- Create and remove links in your app to help the user navigate to different pages - for example, how do you want users to access your index page? Can you make `http://localhost:3000` go straight to the favourites list?
-- Use the edit and update actions to add movies reviews. (TIP: You will also need to add fields to your database to hold these reviews).
+- This code doesn't handle errors well at all. What happens when somebody types in a name that doesn't exist? What happens when you don't fill in your name on the search page? Can you make these experiences better?
+- The links for navigating around this application are a little basic. Can you rearrange them to help the user navigate to different pages more easily? For example, how do you want users to access your index page? Can you make `http://localhost:3000` go straight to the favourites list?
+- What if you like a movie only a little bit, or you want to hate watch a movie? Update the application to allow either ratings out of 5 or text reviews or both. (TIP: You will need to add fields to your database, forms, and extra code inside your view loops to show the information).
+- Can you deploy this to Heroku so you can show it to your parents?
