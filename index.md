@@ -13,11 +13,11 @@ APIs stands for "Application Program Interfaces". APIs are web sites and protoco
 
 Teaching you how to use APIs will let you write much more interesting websites full of content from the web. Other examples of powerful things you can do with APIs include using existing accounts like Facebook or GitHub to log into your website conveniently, providing relevant related photos from Flickr or Instagram, and showing data laid out on a map. For example, it only takes a few lines of JavaScript to [add a Google map in your application](https://developers.google.com/maps/documentation/javascript/adding-a-google-map). By using a map API like Google's, Google takes care of the complicated map functionality, leaving you to focus on just the functionality of your own application.
 
-![API diagram](/{{ site.url }}/images/api-diagram.png)
+![API diagram]({{ site.url }}/images/api-diagram.png)
 
 Your website will request information from an API using HTTP in much the same way as a web browser requests HTML using HTTP. If it goes right, you'll get data back. If something goes wrong in an API request it will return an error. For example, if you search for a non-existent record id, the API may return a 404 error (and you may have to display a nice error message to the person using your website saying you couldn't find what they were looking for). Reading over HTTP return codes can give you a feel of all the things that might go wrong if you're not careful. Some common status codes include:
 
-![HTTP status codes](/{{ site.url }}/images/http-status-codes.png)
+![HTTP status codes]({{ site.url }}/images/http-status-codes.png)
 [Click here to see full list of HTTP status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 
 
@@ -182,7 +182,7 @@ Open [http://localhost:3000](http://localhost:3000) in a web browser.
 
 You should see this image:
 
-![New rails page](/{{ site.url }}/images/new-rails.png)
+![New rails page]({{ site.url }}/images/new-rails.png)
 
 
 ### Add functionality specific to this app
