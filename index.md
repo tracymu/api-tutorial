@@ -309,7 +309,7 @@ Let's change that last line in our search method to only return the array of mov
 @results = JSON.parse(json)["Search"]
 ```
 
-[NOTE: If you are interested in what the `@results` object looks like, ask an instructor about using a debugger]
+[NOTE: If you are interested in what the `@results` object looks like, check out our lesson on how to use a [debugger](debugging)]
 
 This is what the code looks like now:
 
@@ -372,9 +372,5 @@ This code includes a loop, which will loop through each of the movies and pull o
 
  - [Compare favourite movies with a friend](compare-favourite-movies)
  - [Try it again but in JavaScript](omdb-javascript)
- - Twitter api
- - make it pretty
- - geoff to do a weather one?
- - javascript module - e.g. carousel
- - other available apis to work on  - list
-
+ - [More APIs to play with](api-list)
+ - [Debugging](debugging)
