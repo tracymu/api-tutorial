@@ -28,7 +28,7 @@ rails generate scaffold Favourite person:string imdbid:string title:string year:
 Have a look at all the files that were created then migrate your database to add the new favourites table.
 
 ```
-rails db:migrate
+rake db:migrate
 ```
 
 Visit [http://localhost:3000/favourites/](http://localhost:3000/favourites/) and you should see that Rails has written the basic functionality for us, allowing us to list, create, edit and delete "favourite" records.
