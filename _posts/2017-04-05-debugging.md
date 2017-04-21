@@ -12,7 +12,7 @@ Your rails app has a debugging gem called [Byebug](https://github.com/deivid-rod
 
 For example, within your `search` method in your `MoviesController`, you can insert `byebug`
 
-```
+```ruby
   def search
     q = params[:q]
     return unless q.present?
@@ -56,7 +56,7 @@ To let your programme continue to execute, type `continue`.
 
 You can put byebugs in any of your functions, and even in your views:
 
-```
+```erb
 <% if @results.present? %>
   <h1>Movies Found</h1>
   <ul>
@@ -83,9 +83,11 @@ Dig deeper in the Byebug console and inspect the first movie in the `@results`
 {"Title"=>"Bottle Rocket", "Year"=>"1996", "imdbID"=>"tt0115734", "Type"=>"movie", "Poster"=>"https://images-na.ssl-images-amazon.com/images/M/MV5BMTI2NDY4Mzc1Nl5BMl5BanBnXkFtZTcwNzUyNDk5MQ@@._V1_SX300.jpg"}
 (byebug)
 ```
+
 (The first item in an array is at position 0, to get the second item in an array, you would use `@results[1]`, and so on)
 
 Go further and retrieve individual attributes of the `@results`
+
 ```
 (byebug) @results[0]["Poster"]
 "https://images-na.ssl-images-amazon.com/images/M/MV5BMTI2NDY4Mzc1Nl5BMl5BanBnXkFtZTcwNzUyNDk5MQ@@._V1_SX300.jpg"
@@ -93,6 +95,7 @@ Go further and retrieve individual attributes of the `@results`
 ```
 
 Try using the debugger to inspect objects you have saved in your database. For example, when you are making your favourite movie list, you have a Favourite model. In your debugger you can call `inspect` on any of your Favourite objects. 
+
 ```
 (byebug) Favourite.first.inspect
   CACHE (0.0ms)  SELECT  "favourites".* FROM "favourites"  ORDER BY "favourites"."id" ASC LIMIT 1
