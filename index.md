@@ -103,7 +103,7 @@ Output:
   ```plain
   {"Title"=>"Dog Day Afternoon", "Year"=>"1975", "Rated"=>"R"}
   ```
-    
+
 - In the Ruby code example above, what is the type of the variable `a`? What is the type of the variable `b`? (You can check your answer by entering `a.class` or `b.class` into `irb`.)
 - Why do we have two versions of the same data?
 - If you guessed wrong or didn't know, ask the person next to you or an instructor.
@@ -370,7 +370,12 @@ This code includes a loop, which will loop through each of the movies and pull o
 
 ### Other tutorials:
 
- - [Compare favourite movies with a friend](compare-favourite-movies)
- - [Try it again but in JavaScript](omdb-javascript)
- - [More APIs to play with](api-list)
- - [Debugging](debugging)
+ - [Compare favourite movies with a friend](https://rails-girls-api-tutorial.herokuapp.com/compare-favourite-movies)
+ - [Try it again but in JavaScript](https://rails-girls-api-tutorial.herokuapp.com/omdb-javascript)
+ - [More APIs to play with](https://rails-girls-api-tutorial.herokuapp.com/api-list)
+ - [Debugging](https://rails-girls-api-tutorial.herokuapp.com/debugging)
+
+ - [Compare favourite movies with a friend](/compare-favourite-movies)
+ - [Try it again but in JavaScript](/omdb-javascript)
+ - [More APIs to play with](/api-list)
+ - [Debugging](/debugging)
