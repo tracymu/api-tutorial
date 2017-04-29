@@ -370,12 +370,7 @@ This code includes a loop, which will loop through each of the movies and pull o
 
 ### Other tutorials:
 
- - [Compare favourite movies with a friend](https://rails-girls-api-tutorial.herokuapp.com/compare-favourite-movies)
- - [Try it again but in JavaScript](https://rails-girls-api-tutorial.herokuapp.com/omdb-javascript)
- - [More APIs to play with](https://rails-girls-api-tutorial.herokuapp.com/api-list)
- - [Debugging](https://rails-girls-api-tutorial.herokuapp.com/debugging)
-
- - [Compare favourite movies with a friend](/compare-favourite-movies)
- - [Try it again but in JavaScript](/omdb-javascript)
- - [More APIs to play with](/api-list)
- - [Debugging](/debugging)
+ - [Compare favourite movies with a friend](/compare-favourite-movies.html)
+ - [Try it again but in JavaScript](/omdb-javascript.html)
+ - [More APIs to play with](/api-list.html)
+ - [Debugging](/debugging.html)
