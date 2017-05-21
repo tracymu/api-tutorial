@@ -1,28 +1,28 @@
 ---
 layout: default
-title: Compare Favourite Movies
-permalink: compare-favourite-movies
+title: Compare Favourite Songs
+permalink: compare-favourite-songs
 ---
 
-# Let's compare our favourite movies
+# Let's compare our favourite songs
 
-In this tutorial we make a list of our favourite movies and compare it with a friend to see how "movie-compatible" we are. You could use it to decide what movie to watch this weekend.
+In this tutorial we make a list of our favourite songs and compare it with a friend to see how "music-compatible" we are. You could use it to decide what to put on your road trip playlist!
 
 We're going to
 
-* ~~use our movie search functionality to look up movies~~
-* create a database where we can build up a collection of movies we like
-* integrate our search functionality to add movies easily to this database
-* add a page that shows us two people's favourite movie collections, highlighting those in common
+* ~~use our song search functionality to look up songs~~
+* create a database where we can build up a collection of songs we like
+* integrate our search functionality to add songs easily to this database
+* add a page that shows us two people's favourite song collections, highlighting those in common
 
 ## Making a database
 
-First we will create a Rails model called Favourite. For now we'll just save the title of the movies.
+First we will create a Rails model called Favourite. For now we'll just save the title of the songs.
 
 To create the model and associated files, generate a scaffold for a Favourite model with:
 
 ```
-rails generate scaffold Favourite person:string imdbid:string title:string year:string poster:string
+rails generate scaffold Favourite person:string spotify_id:string name:string preview_url:string
 ```
 
 Have a look at all the files that were created then migrate your database to add the new favourites table.
@@ -37,18 +37,22 @@ Visit [http://localhost:3000/favourites/](http://localhost:3000/favourites/) and
 
 It's not very convenient yet, but it works. Let's revise our to do list.
 
-* ~~create a database where we can build up a collection of movies we like~~
-* integrate our search functionality to add movies easily to this database
-* add a page that shows us two people's favourite movie collections, highlighting those in common
+* ~~create a database where we can build up a collection of songs we like~~
+* integrate our search functionality to add songs easily to this database
+* add a page that shows us two people's favourite song collections, highlighting those in common
 
 ## Integrating search
 
 Let's add our search functionality back in. If you have a movies controller from the previous exercise, you can leave it alone, we'll make a new action for this app.
 
-Add this line anywhere between `do` and `end` in `config/routes.rb`:
+Change the `resources :favourites` line in your `config/routes.rb` file
 
 ```ruby
-  get "favourites/search"
+  resources :favourites do
+    collection do
+      get 'search'
+    end
+  end
 ```
 
 Copy the search code from the last exercise into a new `search` method anywhere inside the class in `app/controllers/favourites_controller.rb`:
@@ -61,7 +65,7 @@ Copy the search code from the last exercise into a new `search` method anywhere 
 
     # Request info from API
     require 'net/http'
-    uri = URI.parse("http://www.omdbapi.com/?" + { s: q }.to_query)
+    uri = URI.parse("http://www.omdbapi.com/?" + { s: q, type: 'track' }.to_query)
     json = Net::HTTP.get(uri)
 
     # Turn JSON-formatted string into Ruby data structure and make it available to the view
@@ -69,7 +73,9 @@ Copy the search code from the last exercise into a new `search` method anywhere 
   end
 ```
 
-Add a file named `app/views/favourites/search.html.erb` similar to the last exercise (note, the first line has the word favourites instead of movies):
+Add a file named `app/views/favourites/search.html.erb`, and the content will be similar to the content of the songs search file in the last exercise. However, noe that the first line says 'favourites' instead of 'songs'. 
+
+Also, we've added a new attribute for each song - if a `preview_url` is present for the song, we'll open that up in a new tab.
 
 ```erb
 <%= form_tag(favourites_search_path, method: :get) do %>
@@ -79,12 +85,14 @@ Add a file named `app/views/favourites/search.html.erb` similar to the last exer
 <% end %>
 
 <% if @results.present? %>
-  <h1>Movies Found</h1>
+  <h1>Songs Found</h1>
 
-  <% @results.each do |movie| %>
+  <% @results.each do |song| %>
     <div>
-      <h3><%= movie["Title"] %></h3>
-      <%= image_tag movie["Poster"], class: "poster" %>
+      <h3><%= song["name"] %></h3>
+      <% if song["preview_url"].present? %>
+        <p><a href=<%= "#{song['preview_url']}" %> target="_blank" >Listen</a></p>
+      <% end %>
     </div>
   <% end %>
 <% end %>
@@ -94,7 +102,7 @@ Add a file named `app/views/favourites/search.html.erb` similar to the last exer
 
 How do we save a search result to our database? Rails has many ways. Let's pick one.
 
-What we want is a button next to each movie that, when you click it, adds that movie to the database and associates it with your name.
+What we want is a button next to each song that, when you click it, adds that song to the database and associates it with your name.
 
 We'll need to let the user specify their name by adding some fields to the form:
 
@@ -109,10 +117,9 @@ And add a button next to each search result that will "post" the search result b
       <%= button_to favourites_path({
         favourite: {
           person: params[:person],
-          imdbid: movie["imdbID"],
-          title: movie["Title"],
-          year: movie["Year"],
-          poster: movie["Poster"],
+          spotify_id: song["id"],
+          title: song["name"],
+          preview_url: song["preview_url"],
         },
         method: :post
         }) do %>

@@ -422,7 +422,7 @@ Note in your results you will see names of songs that don't necessarily include 
 
 ### Other tutorials:
 
- - [Compare favourite movies with a friend](/compare-favourite-movies.html)
+ - [Compare favourite songs with a friend](/compare-favourite-songs.html)
  - [Try it again but in JavaScript](/omdb-javascript.html)
  - [More APIs to play with](/api-list.html)
  - [Debugging](/debugging.html)
