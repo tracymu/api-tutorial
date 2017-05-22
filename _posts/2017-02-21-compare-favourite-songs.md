@@ -8,9 +8,8 @@ permalink: compare-favourite-songs
 
 In this tutorial we make a list of our favourite songs and compare it with a friend to see how "music-compatible" we are. You could use it to decide what to put on your road trip playlist!
 
-We're going to
+We're going to:
 
-* ~~use our song search functionality to look up songs~~
 * create a database where we can build up a collection of songs we like
 * integrate our search functionality to add songs easily to this database
 * add a page that shows us two people's favourite song collections, highlighting those in common
@@ -43,7 +42,7 @@ It's not very convenient yet, but it works. Let's revise our to do list.
 
 ## Integrating search
 
-Let's add our search functionality back in. If you have a movies controller from the previous exercise, you can leave it alone, we'll make a new action for this app.
+Let's add our search functionality back in. If you have a songs controller from the previous exercise, you can leave it alone, we'll make a new action for this app.
 
 Change the `resources :favourites` line in your `config/routes.rb` file
 
