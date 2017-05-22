@@ -399,7 +399,7 @@ Find the `search.html.erb` view file and add this code to the end:
 <% end %>
 ```
 
-This code includes a loop, which will loop through each of the songs and pull out the value for the `"name"` key.
+This code includes an iterator, which will loop through each of the songs and pull out the value for the `"name"` key.
 
 Note in your results you will see names of songs that don't necessarily include your keyword. This is because the search functionality is run on all fields of the songs - not just the name. Read the [documentation on the search endpoint](https://developer.spotify.com/web-api/search-item/) to find out how to restrict your search just to the name (or album title, or artist, etc.)
 
