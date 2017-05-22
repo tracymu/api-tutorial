@@ -36,14 +36,14 @@ https://api.spotify.com/v1/search
 ```
 Parameters are included in a url after a `?` and are passed in as pairs. A parameter has a key and a value. The keys accepted by the Spotify APIs search endpoint are listed on the  [instructions page](https://developer.spotify.com/web-api/search-item/). These are the list of things you can ask the search endpoint for information about.
 
-The parametere `q` is for your search query. For example, if you're looking for music with 'sunshine' in the title, you will append the key and value to the end of the url, like this:
+The parameter `q` is for your search query. For example, if you're looking for music with 'sunshine' in the title, you will append the key and value to the end of the url, like this:
 
 [https://api.spotify.com/v1/search?q=sunshine](https://api.spotify.com/v1/search?q=sunshine)
 
 If you make that request, you will see a response saying `"Missing parameter type"`. 
 You can see from the instructions page there is a parameter `type`, which is required in every request. Valid types to use are album, artist, playlist and track.
 
-You can include multiple parameters, separating them with `&`
+You can include multiple parameters, separating them with `&`.
 
 So to look for an album with the word sunshine, you can amend your request to be like this:
 
