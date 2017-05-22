@@ -291,7 +291,7 @@ def search
 end
 ```
 
-This will save your search term as a variable called `q`, create the URL you want to request, and perform the HTTP request to the API, storing the results in the variable `results`.
+This will save your search term as a variable called `q`, create the URL you want to request, and perform the HTTP request to the API, storing the results in the variable `json`.
 
 The last two steps are the same as what your web browser was doing earlier, except now this Ruby code is behaving like a web browser and saving the page to a variable.
 
