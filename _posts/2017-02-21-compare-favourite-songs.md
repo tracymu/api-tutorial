@@ -137,29 +137,29 @@ And after clicking the little button:
 Put a link on the index to our search page. Add this at the bottom of `app/views/favourites/index.html.erb`:
 
 ```erb
-<%= link_to "Search", favourites_search_path %>
+<br />
+<%= link_to "Search for Favourites", search_favourites_path %>
 ```
 
-One last change will make it much nicer, instead of those long poster addresses, let's show the actual movie posters. In the same index HTML template, replace:
+One last change will make it much nicer, instead of those long preview addresses, let's allow the user to open the preview in a new window like we did on the search results. In the same index HTML template, replace:
 
 ```erb
-        <td><%= favourite.poster %></td>
+<td><%= favourite.preview_url %></td>
 ```
 
 With
 
 ```erb
-        <td><%= image_tag favourite.poster, class: "poster small" %></td>
+<td>
+  <% if favourite.preview_url.present? %>
+    <a href=<%= favourite.preview_url %> target="_blank" >Listen</a>
+  <% end %>
+</td>
 ```
+
+![Favourites index]({{ site.url }}/images/fav-songs-index.png)
 
 Have a play around. It could certainly be improved in various ways, but it should let you get work done. Feel free to add any CSS in `app/assets/stylesheets/favourites.scss` if you feel like improving the layout a little, but it's not necessary for this tutorial.
-
-This is what I added, FYI:
-
-```css
-.poster { max-width: 100px; }
-.poster.small { max-width: 50px; }
-```
 
 Let's revise our to do list.
 
