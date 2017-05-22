@@ -408,7 +408,7 @@ Note in your results you will see names of songs that don't necessarily include 
 - Get a piece of paper and draw boxes on it, leaving some space around them. Label them:
   - Browser
   - Rails app
-  - OMDB API
+  - Spotify API
 - Starting at Browser, imagine somebody presses the Search button. Now draw arrows connecting the boxes, illustrating what happens, in order from start to finish. Each arrow should represent some information or communication such as an HTTP request, or a response to an HTTP request.
 - Label the arrows and try to describe what information is being passed. Parameters? JSON?
 - Compare your diagram to the person next to you and discuss any differences.
