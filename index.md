@@ -363,7 +363,7 @@ Let's change that last line in our search method to only return the array of son
 This is what the code looks like now:
 
 ```ruby
-class MoviesController < ApplicationController
+class SongsController < ApplicationController
   def search
     # Avoid requesting info from API if there was no search query
     q = params[:q]
@@ -371,7 +371,7 @@ class MoviesController < ApplicationController
 
     # Request info from API
     require 'net/http'
-    uri = URI.parse("http://www.omdbapi.com/?" + { s: q }.to_query)
+    uri = URI.parse("https://api.spotify.com/v1/search?" + { q: q, type: 'track' }.to_query)
     json = Net::HTTP.get(uri)
 
     # Turn JSON-formatted string into Ruby data structure and make it available to the view
