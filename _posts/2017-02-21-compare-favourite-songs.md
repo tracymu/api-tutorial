@@ -231,7 +231,7 @@ The last thing we want to do is highlight the favourite songs these two people h
     <% css_class = if @shared_favourite_ids.include?(favourite.spotify_id) then "shared" else "unshared" end %>
 ```
 
-You can then add this class to an `<img>` tag like this:
+You can then add this class to a `<span>` tag like this:
 
 ```erb
 <li><span class="#{css_class}"><%= favourite.name %></span></li>
