@@ -286,7 +286,7 @@ def search
   return unless q.present?
 
   require 'net/http'
-  uri = URI.parse("http://www.omdbapi.com/?" + { s: q, type: 'track' }.to_query)
+  uri = URI.parse("https://api.spotify.com/v1/search?" + { q: q, type: 'track' }.to_query)
   json = Net::HTTP.get(uri)
 end
 ```
