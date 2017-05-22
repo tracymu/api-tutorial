@@ -258,5 +258,5 @@ We've focused on getting something working, not doing it attractively, elegantly
 - Everything is pretty ugly. Even 10 minutes of CSS will probably make everything more useable.
 - This code doesn't handle errors well at all. What happens when somebody types in a name that doesn't exist? What happens when you don't fill in your name on the search page? Can you make these experiences better?
 - The links for navigating around this application are a little basic. Can you rearrange them to help the user navigate to different pages more easily? For example, how do you want users to access your index page? Can you make `http://localhost:3000` go straight to the favourites list?
-- What if you like a song only a little bit, or you want to hate watch a song? Update the application to allow either ratings out of 5 or text reviews or both. (TIP: You will need to add fields to your database, forms, and extra code inside your view loops to show the information).
+- What if you like a song only a little bit, or you absolutely hate a song? Update the application to allow either ratings out of 5 or text reviews or both. (TIP: You will need to add fields to your database, forms, and extra code inside your view loops to show the information).
 - Can you deploy this to Heroku so you can show it to your parents?
