@@ -64,11 +64,11 @@ Copy the search code from the last exercise into a new `search` method anywhere 
 
     # Request info from API
     require 'net/http'
-    uri = URI.parse("http://www.omdbapi.com/?" + { s: q, type: 'track' }.to_query)
+    uri = URI.parse("https://api.spotify.com/v1/search?" + { q: q, type: 'track' }.to_query)
     json = Net::HTTP.get(uri)
 
     # Turn JSON-formatted string into Ruby data structure and make it available to the view
-    @results = JSON.parse(json)["Search"]
+    @results = JSON.parse(json)["tracks"]["items"]
   end
 ```
 
