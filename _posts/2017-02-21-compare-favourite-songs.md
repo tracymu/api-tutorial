@@ -117,7 +117,7 @@ And add a button next to each search result that will "post" the search result b
         favourite: {
           person: params[:person],
           spotify_id: song["id"],
-          title: song["name"],
+          name: song["name"],
           preview_url: song["preview_url"],
         },
         method: :post
@@ -128,11 +128,11 @@ And add a button next to each search result that will "post" the search result b
 
 `&#9829;` is an "HTML entity" which is jargon for a character or glyph, in this case a symbol.
 
-![Search page version 2]({{ site.url }}/images/fav-movies-search2.png)
+![Search page version 2]({{ site.url }}/images/fav-songs-search2.png)
 
 And after clicking the little button:
 
-![Added from search]({{ site.url }}/images/fav-movies-added.png)
+![Added from search]({{ site.url }}/images/fav-song-added.png)
 
 Put a link on the index to our search page. Add this at the bottom of `app/views/favourites/index.html.erb`:
 
