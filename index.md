@@ -7,7 +7,7 @@ title: Let's learn about APIs
 
 ## What is an API?
 
-API stands for "Application Program Interfaces". In the context of the web, APIs are web sites that return data instead of web pages, allow you to incorporate rich and interesting data and features into yourown websites. In this tutorial, we're going to use an API to search a database for your favourite movies.
+API stands for "Application Program Interfaces". In the context of the web, APIs are web sites that return data instead of web pages, allowing you to incorporate rich and interesting data and features into yourown websites. In this tutorial, we're going to use a the [Spotify API](https://developer.spotify.com/web-api/) to search for your favourite songs.
 
 ## Why learn APIs?
 
