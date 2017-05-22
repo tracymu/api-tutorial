@@ -173,13 +173,19 @@ Earlier we added a page called `search`. Now we want to add a page called `compa
 Add a line to `config/routes.rb`:
 
 ```ruby
-  get "favourites/compare"
+  resources :favourites do
+    collection do
+      get 'search'
+      get 'compare'
+    end
+  end
 ```
 
 Add a link at the bottom of `app/views/favourites/index.html.erb`:
 
 ```erb
-<%= link_to 'Compare', favourites_compare_path %>
+<br />
+<%= link_to 'Compare Favourites', compare_favourites_path %>
 ```
 
 Add a file named `app/views/favourites/compare.html.erb`:
