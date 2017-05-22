@@ -72,12 +72,12 @@ Copy the search code from the last exercise into a new `search` method anywhere 
   end
 ```
 
-Add a file named `app/views/favourites/search.html.erb`, and the content will be similar to the content of the songs search file in the last exercise. However, noe that the first line says 'favourites' instead of 'songs'. 
+Add a file named `app/views/favourites/search.html.erb`, and the content will be similar to the content of the songs search file in the last exercise. However, note that the first line uses 'search_favourites_path' instead of 'songs_search_path'.
 
 Also, we've added a new attribute for each song - if a `preview_url` is present for the song, we'll open that up in a new tab.
 
 ```erb
-<%= form_tag(favourites_search_path, method: :get) do %>
+<%= form_tag(search_favourites_path, method: :get) do %>
   <%= label_tag(:q, "Search for:") %>
   <%= text_field_tag(:q, params[:q]) %>
   <%= submit_tag("Search") %>
@@ -97,7 +97,7 @@ Also, we've added a new attribute for each song - if a `preview_url` is present 
 <% end %>
 ```
 
-![Search page version 1]({{ site.url }}/images/fav-movies-search1.png)
+![Search page version 1]({{ site.url }}/images/fav-songs-search1.png)
 
 How do we save a search result to our database? Rails has many ways. Let's pick one.
 
