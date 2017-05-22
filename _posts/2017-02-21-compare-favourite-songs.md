@@ -193,9 +193,9 @@ Add a file named `app/views/favourites/compare.html.erb`:
 Just like the search page, let's add a form at the top that lets the user specify two people's names:
 
 ```erb
-<h2>Compare</h2>
+<h1>Compare Favourites</h1>
 
-<%= form_tag(favourites_compare_path, method: :get) do %>
+<%= form_tag(compare_favourites_path, method: :get) do %>
   <%= label_tag(:person_a, "Person A") %>
   <%= text_field_tag(:person_a, params[:person_a]) %>
   <%= label_tag(:person_b, "Person B") %>
@@ -219,7 +219,7 @@ Now let's add a `compare` method anywhere inside the class in `app/controllers/f
 
 I'll leave you to figure out how to show each person's list of favourite movies although if you get stuck, check the `search.html.erb` file. This is how mine looks:
 
-![Compare page version 1]({{ site.url }}/images/fav-movies-compare1.png)
+![Compare page version 1]({{ site.url }}/images/fav-songs-compare1.png)
 
 The last thing we want to do is highlight the favourite movies these two people have in common. Since you've come this far, I'm not going to tell you everything, but I'll give you one strategy that will work:
 
