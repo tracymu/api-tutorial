@@ -265,7 +265,7 @@ This is the page where we want to put in our search box. So, open that view in y
 Add this code to your template file:
 
 ```erb
-<%= form_tag(movies_search_path, method: :get) do %>
+<%= form_tag(songs_search_path, method: :get) do %>
     <%= label_tag(:q, "Search for:") %>
     <%= text_field_tag(:q) %>
     <%= submit_tag("Search") %>
