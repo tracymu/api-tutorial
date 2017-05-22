@@ -262,7 +262,7 @@ e.g. [http://localhost:3000/songs/search](http://localhost:3000/songs/search)
 
 This is the page where we want to put in our search box. So, open that view in your editor and read this page of the [Rails Guides](http://guides.rubyonrails.org/form_helpers.html#a-generic-search-form) to learn about making a simple search form.
 
-Replace the code in your template file with:
+Replace the code in your view file (`app/views/songs/search.html.erb`) with:
 
 ```erb
 <%= form_tag(songs_search_path, method: :get) do %>
@@ -278,7 +278,7 @@ Which makes a simple search box that looks like this:
 
 ### Make a request to the Spotify API
 
-In your songs controller, update the `search` method.
+In your songs controller (`app/controllers/songs_controller.rb`), update the `search` method.
 
 ```ruby
 def search
