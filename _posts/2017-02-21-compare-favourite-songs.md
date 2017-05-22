@@ -72,7 +72,7 @@ Copy the search code from the last exercise into a new `search` method anywhere 
   end
 ```
 
-Add a file named `app/views/favourites/search.html.erb`, and the content will be similar to the content of the songs search file in the last exercise. However, note that the first line uses 'search_favourites_path' instead of 'songs_search_path'.
+Add a file named `app/views/favourites/search.html.erb`, and the content will be similar to the content of the songs search file in the last exercise. However, note that the first line uses `search_favourites_path` instead of `songs_search_path`.
 
 Also, we've added a new attribute for each song - if a `preview_url` is present for the song, we'll open that up in a new tab.
 
