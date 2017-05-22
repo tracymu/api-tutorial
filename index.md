@@ -384,7 +384,7 @@ end
 
 We'd like to show the list of results in HTML like this:
 
-![movie list]({{ site.url }}/images/movie-list.png)
+![song list]({{ site.url }}/images/song-list.png)
 
 Find the `search.html.erb` view file and add this code to the end:
 
