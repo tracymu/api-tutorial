@@ -223,25 +223,25 @@ I'll leave you to figure out how to show each person's list of favourite movies 
 
 The last thing we want to do is highlight the favourite movies these two people have in common. Since you've come this far, I'm not going to tell you everything, but I'll give you one strategy that will work:
 
-- Add a new array variable in the controller that will keep track of which IMDB ids are shared (maybe `@shared_imdb_ids = []`).
-- Loop through both arrays in the controller and if you find any IMDB ids that are equal, add to this array (`@shared_imdb_ids.push(shared_imdb_id)`).
+- Add a new array variable in the controller that will keep track of which Spotify ids are shared (maybe `@shared_favourite_ids = []`).
+- Loop through both arrays in the controller and if you find any `spotify_id`s that are equal, add to this array (`@shared_favourite_ids.push(shared_spotify_id)`).
 - Add a little code inside any loops in `compare.html.erb` to look up the new variable and determine whether to add an extra CSS class:
 
 ```erb
-    <% css_class = if @shared_imdb_ids.include?(favourite.imdbid) then "shared poster" else "unshared poster" end %>
+    <% css_class = if @shared_favourite_ids.include?(favourite.spotify_id) then "shared" else "unshared" end %>
 ```
 
 You can then add this class to an `<img>` tag like this:
 
 ```erb
-      <%= image_tag favourite.poster, class: css_class %>
+<li><span class="#{css_class}"><%= favourite.name %></span></li>
 ```
 
 Then add some CSS to visually distinguish the shared movies.
 
 This is what mine ended up looking like:
 
-![Compare page version 2]({{ site.url }}/images/fav-movies-compare2.png)
+![Compare page version 2]({{ site.url }}/images/fav-songs-compare2.png)
 
 Look at all the things we did today:
 
