@@ -262,7 +262,7 @@ e.g. [http://localhost:3000/songs/search](http://localhost:3000/songs/search)
 
 This is the page where we want to put in our search box. So, open that view in your editor and read this page of the [Rails Guides](http://guides.rubyonrails.org/form_helpers.html#a-generic-search-form) to learn about making a simple search form.
 
-Add this code to your template file:
+Replace the code in your template file with:
 
 ```erb
 <%= form_tag(songs_search_path, method: :get) do %>
