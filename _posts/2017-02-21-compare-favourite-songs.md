@@ -8,9 +8,8 @@ permalink: compare-favourite-songs
 
 In this tutorial we make a list of our favourite songs and compare it with a friend to see how "music-compatible" we are. You could use it to decide what to put on your road trip playlist!
 
-We're going to
+We're going to:
 
-* ~~use our song search functionality to look up songs~~
 * create a database where we can build up a collection of songs we like
 * integrate our search functionality to add songs easily to this database
 * add a page that shows us two people's favourite song collections, highlighting those in common
@@ -33,7 +32,7 @@ rake db:migrate
 
 Visit [http://localhost:3000/favourites/](http://localhost:3000/favourites/) and you should see that Rails has written the basic functionality for us, allowing us to list, create, edit and delete "favourite" records.
 
-![Add form]({{ site.url }}/images/fav-movies-add-form.png)
+![Add form]({{ site.url }}/images/fav-song-add-form.png)
 
 It's not very convenient yet, but it works. Let's revise our to do list.
 
@@ -43,7 +42,7 @@ It's not very convenient yet, but it works. Let's revise our to do list.
 
 ## Integrating search
 
-Let's add our search functionality back in. If you have a movies controller from the previous exercise, you can leave it alone, we'll make a new action for this app.
+Let's add our search functionality back in. If you have a songs controller from the previous exercise, you can leave it alone, we'll make a new action for this app.
 
 Change the `resources :favourites` line in your `config/routes.rb` file
 
@@ -65,20 +64,20 @@ Copy the search code from the last exercise into a new `search` method anywhere 
 
     # Request info from API
     require 'net/http'
-    uri = URI.parse("http://www.omdbapi.com/?" + { s: q, type: 'track' }.to_query)
+    uri = URI.parse("https://api.spotify.com/v1/search?" + { q: q, type: 'track' }.to_query)
     json = Net::HTTP.get(uri)
 
     # Turn JSON-formatted string into Ruby data structure and make it available to the view
-    @results = JSON.parse(json)["Search"]
+    @results = JSON.parse(json)["tracks"]["items"]
   end
 ```
 
-Add a file named `app/views/favourites/search.html.erb`, and the content will be similar to the content of the songs search file in the last exercise. However, noe that the first line says 'favourites' instead of 'songs'. 
+Add a file named `app/views/favourites/search.html.erb`, and the content will be similar to the content of the songs search file in the last exercise. However, note that the first line uses `search_favourites_path` instead of `songs_search_path`.
 
 Also, we've added a new attribute for each song - if a `preview_url` is present for the song, we'll open that up in a new tab.
 
 ```erb
-<%= form_tag(favourites_search_path, method: :get) do %>
+<%= form_tag(search_favourites_path, method: :get) do %>
   <%= label_tag(:q, "Search for:") %>
   <%= text_field_tag(:q, params[:q]) %>
   <%= submit_tag("Search") %>
@@ -98,7 +97,7 @@ Also, we've added a new attribute for each song - if a `preview_url` is present 
 <% end %>
 ```
 
-![Search page version 1]({{ site.url }}/images/fav-movies-search1.png)
+![Search page version 1]({{ site.url }}/images/fav-songs-search1.png)
 
 How do we save a search result to our database? Rails has many ways. Let's pick one.
 
@@ -118,7 +117,7 @@ And add a button next to each search result that will "post" the search result b
         favourite: {
           person: params[:person],
           spotify_id: song["id"],
-          title: song["name"],
+          name: song["name"],
           preview_url: song["preview_url"],
         },
         method: :post
@@ -129,58 +128,64 @@ And add a button next to each search result that will "post" the search result b
 
 `&#9829;` is an "HTML entity" which is jargon for a character or glyph, in this case a symbol.
 
-![Search page version 2]({{ site.url }}/images/fav-movies-search2.png)
+![Search page version 2]({{ site.url }}/images/fav-songs-search2.png)
 
 And after clicking the little button:
 
-![Added from search]({{ site.url }}/images/fav-movies-added.png)
+![Added from search]({{ site.url }}/images/fav-song-added.png)
 
 Put a link on the index to our search page. Add this at the bottom of `app/views/favourites/index.html.erb`:
 
 ```erb
-<%= link_to "Search", favourites_search_path %>
+<br />
+<%= link_to "Search for Favourites", search_favourites_path %>
 ```
 
-One last change will make it much nicer, instead of those long poster addresses, let's show the actual movie posters. In the same index HTML template, replace:
+One last change will make it much nicer, instead of those long preview addresses, let's allow the user to open the preview in a new window like we did on the search results. In the same index HTML template, replace:
 
 ```erb
-        <td><%= favourite.poster %></td>
+<td><%= favourite.preview_url %></td>
 ```
 
 With
 
 ```erb
-        <td><%= image_tag favourite.poster, class: "poster small" %></td>
+<td>
+  <% if favourite.preview_url.present? %>
+    <a href=<%= favourite.preview_url %> target="_blank" >Listen</a>
+  <% end %>
+</td>
 ```
+
+![Favourites index]({{ site.url }}/images/fav-songs-index.png)
 
 Have a play around. It could certainly be improved in various ways, but it should let you get work done. Feel free to add any CSS in `app/assets/stylesheets/favourites.scss` if you feel like improving the layout a little, but it's not necessary for this tutorial.
 
-This is what I added, FYI:
-
-```css
-.poster { max-width: 100px; }
-.poster.small { max-width: 50px; }
-```
-
 Let's revise our to do list.
 
-* ~~integrate our search functionality to add movies easily to this database~~
-* add a page that shows us two people's favourite movie collections, highlighting those in common
+* ~~integrate our search functionality to add songs easily to this database~~
+* add a page that shows us two people's favourite song collections, highlighting those in common
 
-## Comparing movies
+## Comparing songs
 
 Earlier we added a page called `search`. Now we want to add a page called `compare`. The process is the same.
 
 Add a line to `config/routes.rb`:
 
 ```ruby
-  get "favourites/compare"
+  resources :favourites do
+    collection do
+      get 'search'
+      get 'compare'
+    end
+  end
 ```
 
 Add a link at the bottom of `app/views/favourites/index.html.erb`:
 
 ```erb
-<%= link_to 'Compare', favourites_compare_path %>
+<br />
+<%= link_to 'Compare Favourites', compare_favourites_path %>
 ```
 
 Add a file named `app/views/favourites/compare.html.erb`:
@@ -188,9 +193,9 @@ Add a file named `app/views/favourites/compare.html.erb`:
 Just like the search page, let's add a form at the top that lets the user specify two people's names:
 
 ```erb
-<h2>Compare</h2>
+<h1>Compare Favourites</h1>
 
-<%= form_tag(favourites_compare_path, method: :get) do %>
+<%= form_tag(compare_favourites_path, method: :get) do %>
   <%= label_tag(:person_a, "Person A") %>
   <%= text_field_tag(:person_a, params[:person_a]) %>
   <%= label_tag(:person_b, "Person B") %>
@@ -212,38 +217,38 @@ Now let's add a `compare` method anywhere inside the class in `app/controllers/f
   end
 ```
 
-I'll leave you to figure out how to show each person's list of favourite movies although if you get stuck, check the `search.html.erb` file. This is how mine looks:
+I'll leave you to figure out how to show each person's list of favourite songs although if you get stuck, check the `search.html.erb` file. This is how mine looks:
 
-![Compare page version 1]({{ site.url }}/images/fav-movies-compare1.png)
+![Compare page version 1]({{ site.url }}/images/fav-songs-compare1.png)
 
-The last thing we want to do is highlight the favourite movies these two people have in common. Since you've come this far, I'm not going to tell you everything, but I'll give you one strategy that will work:
+The last thing we want to do is highlight the favourite songs these two people have in common. Since you've come this far, I'm not going to tell you everything, but I'll give you one strategy that will work:
 
-- Add a new array variable in the controller that will keep track of which IMDB ids are shared (maybe `@shared_imdb_ids = []`).
-- Loop through both arrays in the controller and if you find any IMDB ids that are equal, add to this array (`@shared_imdb_ids.push(shared_imdb_id)`).
+- Add a new array variable in the controller that will keep track of which Spotify ids are shared (maybe `@shared_favourite_ids = []`).
+- Loop through both arrays in the controller and if you find any `spotify_id`s that are equal, add to this array (`@shared_favourite_ids.push(shared_spotify_id)`).
 - Add a little code inside any loops in `compare.html.erb` to look up the new variable and determine whether to add an extra CSS class:
 
 ```erb
-    <% css_class = if @shared_imdb_ids.include?(favourite.imdbid) then "shared poster" else "unshared poster" end %>
+    <% css_class = if @shared_favourite_ids.include?(favourite.spotify_id) then "shared" else "unshared" end %>
 ```
 
-You can then add this class to an `<img>` tag like this:
+You can then add this class to a `<span>` tag like this:
 
 ```erb
-      <%= image_tag favourite.poster, class: css_class %>
+<li><span class="#{css_class}"><%= favourite.name %></span></li>
 ```
 
-Then add some CSS to visually distinguish the shared movies.
+Then add some CSS to visually distinguish the shared songs.
 
 This is what mine ended up looking like:
 
-![Compare page version 2]({{ site.url }}/images/fav-movies-compare2.png)
+![Compare page version 2]({{ site.url }}/images/fav-songs-compare2.png)
 
 Look at all the things we did today:
 
-* ~~use our movie search functionality to look up movies~~
-* ~~create a database where we can build up a collection of movies we like~~
-* ~~integrate our search functionality to add movies easily to this database~~
-* ~~add a page that shows us two people's favourite movie collections, highlighting those in common~~
+* ~~use our song search functionality to look up song~~
+* ~~create a database where we can build up a collection of song we like~~
+* ~~integrate our search functionality to add song easily to this database~~
+* ~~add a page that shows us two people's favourite song collections, highlighting those in common~~
 
 ### Next steps
 
@@ -253,5 +258,5 @@ We've focused on getting something working, not doing it attractively, elegantly
 - Everything is pretty ugly. Even 10 minutes of CSS will probably make everything more useable.
 - This code doesn't handle errors well at all. What happens when somebody types in a name that doesn't exist? What happens when you don't fill in your name on the search page? Can you make these experiences better?
 - The links for navigating around this application are a little basic. Can you rearrange them to help the user navigate to different pages more easily? For example, how do you want users to access your index page? Can you make `http://localhost:3000` go straight to the favourites list?
-- What if you like a movie only a little bit, or you want to hate watch a movie? Update the application to allow either ratings out of 5 or text reviews or both. (TIP: You will need to add fields to your database, forms, and extra code inside your view loops to show the information).
+- What if you like a song only a little bit, or you absolutely hate a song? Update the application to allow either ratings out of 5 or text reviews or both. (TIP: You will need to add fields to your database, forms, and extra code inside your view loops to show the information).
 - Can you deploy this to Heroku so you can show it to your parents?

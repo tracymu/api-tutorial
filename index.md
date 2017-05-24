@@ -7,11 +7,11 @@ title: Let's learn about APIs
 
 ## What is an API?
 
-APIs stands for "Application Program Interfaces". APIs are web sites and protocols that allow you to incorporate rich and interesting data and features into your websites. In this tutorial, we're going to use an API to search a database for your favourite movies.
+API stands for "Application Program Interfaces". In the context of the web, APIs are web sites that return data instead of web pages, allowing you to incorporate rich and interesting data and features into your own websites. In this tutorial, we're going to use a the [Spotify API](https://developer.spotify.com/web-api/) to search for your favourite songs.
 
 ## Why learn APIs?
 
-Teaching you how to use APIs will let you write much more interesting websites full of content from the web. Other examples of powerful things you can do with APIs include using existing accounts like Facebook or GitHub to log into your website conveniently, providing relevant related photos from Flickr or Instagram, and showing data laid out on a map. For example, it only takes a few lines of JavaScript to [add a Google map in your application](https://developers.google.com/maps/documentation/javascript/adding-a-google-map). By using a map API like Google's, Google takes care of the complicated map functionality, leaving you to focus on just the functionality of your own application.
+Learning to use APIs will allow you to write much more interesting websites full of content from the web. Other examples of powerful things you can do with APIs include using existing accounts like Facebook or GitHub to log into your website conveniently, providing relevant related photos from Flickr or Instagram, and showing data laid out on a map. For example, it only takes a few lines of JavaScript to [add a Google map in your application](https://developers.google.com/maps/documentation/javascript/adding-a-google-map). By using a map API like Google's, Google takes care of the complicated map functionality, leaving you to focus on just the functionality of your own application.
 
 ![API diagram]({{ site.url }}/images/api-diagram.png)
 
@@ -36,14 +36,14 @@ https://api.spotify.com/v1/search
 ```
 Parameters are included in a url after a `?` and are passed in as pairs. A parameter has a key and a value. The keys accepted by the Spotify APIs search endpoint are listed on the  [instructions page](https://developer.spotify.com/web-api/search-item/). These are the list of things you can ask the search endpoint for information about.
 
-The parametere `q` is for your search query. For example, if you're looking for music with 'sunshine' in the title, you will append the key and value to the end of the url, like this:
+The parameter `q` is for your search query. For example, if you're looking for music with 'sunshine' in the title, you will append the key and value to the end of the url, like this:
 
 [https://api.spotify.com/v1/search?q=sunshine](https://api.spotify.com/v1/search?q=sunshine)
 
 If you make that request, you will see a response saying `"Missing parameter type"`. 
 You can see from the instructions page there is a parameter `type`, which is required in every request. Valid types to use are album, artist, playlist and track.
 
-You can include multiple parameters, separating them with `&`
+You can include multiple parameters, separating them with `&`.
 
 So to look for an album with the word sunshine, you can amend your request to be like this:
 
@@ -262,10 +262,10 @@ e.g. [http://localhost:3000/songs/search](http://localhost:3000/songs/search)
 
 This is the page where we want to put in our search box. So, open that view in your editor and read this page of the [Rails Guides](http://guides.rubyonrails.org/form_helpers.html#a-generic-search-form) to learn about making a simple search form.
 
-Add this code to your template file:
+Replace the code in your view file (`app/views/songs/search.html.erb`) with:
 
 ```erb
-<%= form_tag(movies_search_path, method: :get) do %>
+<%= form_tag(songs_search_path, method: :get) do %>
     <%= label_tag(:q, "Search for:") %>
     <%= text_field_tag(:q) %>
     <%= submit_tag("Search") %>
@@ -278,7 +278,7 @@ Which makes a simple search box that looks like this:
 
 ### Make a request to the Spotify API
 
-In your songs controller, update the `search` method.
+In your songs controller (`app/controllers/songs_controller.rb`), update the `search` method.
 
 ```ruby
 def search
@@ -286,12 +286,12 @@ def search
   return unless q.present?
 
   require 'net/http'
-  uri = URI.parse("http://www.omdbapi.com/?" + { s: q, type: 'track' }.to_query)
+  uri = URI.parse("https://api.spotify.com/v1/search?" + { q: q, type: 'track' }.to_query)
   json = Net::HTTP.get(uri)
 end
 ```
 
-This will save your search term as a variable called `q`, create the URL you want to request, and perform the HTTP request to the API, storing the results in the variable `results`.
+This will save your search term as a variable called `q`, create the URL you want to request, and perform the HTTP request to the API, storing the results in the variable `json`.
 
 The last two steps are the same as what your web browser was doing earlier, except now this Ruby code is behaving like a web browser and saving the page to a variable.
 
@@ -363,7 +363,7 @@ Let's change that last line in our search method to only return the array of son
 This is what the code looks like now:
 
 ```ruby
-class MoviesController < ApplicationController
+class SongsController < ApplicationController
   def search
     # Avoid requesting info from API if there was no search query
     q = params[:q]
@@ -371,7 +371,7 @@ class MoviesController < ApplicationController
 
     # Request info from API
     require 'net/http'
-    uri = URI.parse("http://www.omdbapi.com/?" + { s: q }.to_query)
+    uri = URI.parse("https://api.spotify.com/v1/search?" + { q: q, type: 'track' }.to_query)
     json = Net::HTTP.get(uri)
 
     # Turn JSON-formatted string into Ruby data structure and make it available to the view
@@ -384,7 +384,7 @@ end
 
 We'd like to show the list of results in HTML like this:
 
-![movie list]({{ site.url }}/images/movie-list.png)
+![song list]({{ site.url }}/images/song-list.png)
 
 Find the `search.html.erb` view file and add this code to the end:
 
@@ -399,7 +399,7 @@ Find the `search.html.erb` view file and add this code to the end:
 <% end %>
 ```
 
-This code includes a loop, which will loop through each of the songs and pull out the value for the `"name"` key.
+This code includes an iterator, which will loop through each of the songs and pull out the value for the `"name"` key.
 
 Note in your results you will see names of songs that don't necessarily include your keyword. This is because the search functionality is run on all fields of the songs - not just the name. Read the [documentation on the search endpoint](https://developer.spotify.com/web-api/search-item/) to find out how to restrict your search just to the name (or album title, or artist, etc.)
 
@@ -408,7 +408,7 @@ Note in your results you will see names of songs that don't necessarily include 
 - Get a piece of paper and draw boxes on it, leaving some space around them. Label them:
   - Browser
   - Rails app
-  - OMDB API
+  - Spotify API
 - Starting at Browser, imagine somebody presses the Search button. Now draw arrows connecting the boxes, illustrating what happens, in order from start to finish. Each arrow should represent some information or communication such as an HTTP request, or a response to an HTTP request.
 - Label the arrows and try to describe what information is being passed. Parameters? JSON?
 - Compare your diagram to the person next to you and discuss any differences.
