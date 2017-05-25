@@ -295,7 +295,7 @@ This will save your search term as a variable called `q`, create the URL you wan
 
 The last two steps are the same as what your web browser was doing earlier, except now this Ruby code is behaving like a web browser and saving the page to a variable.
 
-The result comes back as a JSON list of artists and their details:
+The result comes back as a JSON list of artists and their details (though you won't see any of this in your browser yet. If you want to see these results, read our article about [debugging](debugging)).
 
 ```plain
 {
@@ -358,7 +358,7 @@ Let's change that last line in our search method to only return the array of son
 @results = JSON.parse(json)["tracks"]["items"]
 ```
 
-[NOTE: If you are interested in what the `@results` object looks like, check out our lesson on how to use a [debugger](debugging)]
+[NOTE: If you are interested in what the `@results` object looks like, you can use a [debugger](debugging)]
 
 This is what the code looks like now:
 

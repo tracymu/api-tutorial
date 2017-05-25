@@ -97,6 +97,8 @@ Also, we've added a new attribute for each song - if a `preview_url` is present 
 <% end %>
 ```
 
+To view this page, you need to go to the new route at `favourites/search`
+
 ![Search page version 1]({{ site.url }}/images/fav-songs-search1.png)
 
 How do we save a search result to our database? Rails has many ways. Let's pick one.
