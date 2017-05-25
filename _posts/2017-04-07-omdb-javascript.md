@@ -1,10 +1,10 @@
 ---
 layout: default
-title: OMDB API using JavaScript
-permalink: omdb-javascript
+title: Spotify API using JavaScript
+permalink: api-javascript
 ---
 
-# Search OMDB with JavaScript
+# Search Spotify with JavaScript
 
 In this tutorial, we're going to do all the same things we did in the Rails version but with JavaScript instead of Rails. The goal is to contextualise our knowledge of APIs by comparing and constrating the code.
 

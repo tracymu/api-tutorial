@@ -127,7 +127,7 @@ Note that the value of 'artists' is a list, which could contain more than one ar
 
 ## Let's build something using an API
 
-We're going to build a small rails app to get information from the OMDB API via a search box and display the results.
+We're going to build a small rails app to get information from the Spotify API via a search box and display the results.
 
 ### Set up a simple rails app
 
@@ -423,6 +423,6 @@ Note in your results you will see names of songs that don't necessarily include 
 ### Other tutorials:
 
  - [Compare favourite songs with a friend](/compare-favourite-songs.html)
- - [Try it again but in JavaScript](/omdb-javascript.html)
+ - [Try it again but in JavaScript](/api-javascript.html)
  - [More APIs to play with](/api-list.html)
  - [Debugging](/debugging.html)

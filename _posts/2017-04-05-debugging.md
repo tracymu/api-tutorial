@@ -1,6 +1,6 @@
 ---
 layout: default
-title: OMDB API using JavaScript
+title: Using a Debugger
 permalink: debugging
 ---
 
@@ -10,15 +10,17 @@ Debugging gives you a way to stop your programme while it is being executed and 
 
 Your rails app has a debugging gem called [Byebug](https://github.com/deivid-rodriguez/byebug) automatically included. To use it, you can just call `byebug` at any point in your code.
 
-For example, within your `search` method in your `MoviesController`, you can insert `byebug`
+For example, within your `search` method in your `SongsController`, you can insert `byebug`
 
 ```ruby
   def search
+    # Avoid requesting info from API if there was no search query
     q = params[:q]
     return unless q.present?
 
+    # Request info from API
     require 'net/http'
-    uri = URI.parse("http://www.omdbapi.com/?" + { s: q }.to_query)
+    uri = URI.parse("https://api.spotify.com/v1/search?" + { q: q, type: 'track' }.to_query)
     byebug
     json = Net::HTTP.get(uri)
   end
@@ -32,7 +34,7 @@ Then, when you reload the page or try to search, your programme will be interrup
     4:     return unless q.present?
     5:
     6:     require 'net/http'
-    7:     uri = URI.parse("http://www.omdbapi.com/?" + { s: q }.to_query)
+    7:     uri = URI.parse("https://api.spotify.com/v1/search?" + { q: q, type: 'track' }.to_query)
     8:     byebug
 =>  9:     json = Net::HTTP.get(uri)
    10:   end
@@ -58,14 +60,9 @@ You can put byebugs in any of your functions, and even in your views:
 
 ```erb
 <% if @results.present? %>
-  <h1>Movies Found</h1>
-  <ul>
-    <% byebug %>
-    <% @results.each do |movie| %>
-      <li><%= movie["Title"] %></li>
-    <% end %>
-  </ul>
-<% end %>
+  <% byebug %>
+  <h1>Songs Found</h1>
+
 ```
 
 Your `@results` variable is available in this view, so you can have a closer look at it.
@@ -76,7 +73,7 @@ Your `@results` variable is available in this view, so you can have a closer loo
 (byebug)
 ```
 
-Dig deeper in the Byebug console and inspect the first movie in the `@results`
+Dig deeper in the Byebug console and inspect the first song in the `@results`
 
 ```
 (byebug) @results[0]
