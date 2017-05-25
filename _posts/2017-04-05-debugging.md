@@ -48,9 +48,9 @@ At this point, you could have a look at the params or the uri that has been buil
 
 ```
 (byebug) params
-{"utf8"=>"✓", "q"=>"dog", "commit"=>"Search", "controller"=>"movies", "action"=>"search"}
+{"utf8"=>"✓", "q"=>"rain", "commit"=>"Search", "controller"=>"songs", "action"=>"search"}
 (byebug) uri
-#<URI::HTTP http://www.omdbapi.com/?s=dog>
+#<URI::HTTPS:0x007fed68a0b088 URL:https://api.spotify.com/v1/search?q=rain&type=track>
 (byebug)
 ```
 
@@ -65,36 +65,29 @@ You can put byebugs in any of your functions, and even in your views:
 
 ```
 
-Your `@results` variable is available in this view, so you can have a closer look at it.
-
-```
-(byebug) @results
-[{"Title"=>"Bottle Rocket", "Year"=>"1996", "imdbID"=>"tt0115734", "Type"=>"movie", "Poster"=>"https://images-na.ssl-images-amazon.com/images/M/MV5BMTI2NDY4Mzc1Nl5BMl5BanBnXkFtZTcwNzUyNDk5MQ@@._V1_SX300.jpg"}, ... }]
-(byebug)
-```
-
-Dig deeper in the Byebug console and inspect the first song in the `@results`
+Your `@results` variable is available in this view, so you can have a closer look at it. When you do, you will see that the structure of `@results` is an array of albums. The first item in an array is at position 0, so you can get just the first item with `@results[0]`. To get the second item in an array, you would use `@results[1]`, and so on.
 
 ```
 (byebug) @results[0]
-{"Title"=>"Bottle Rocket", "Year"=>"1996", "imdbID"=>"tt0115734", "Type"=>"movie", "Poster"=>"https://images-na.ssl-images-amazon.com/images/M/MV5BMTI2NDY4Mzc1Nl5BMl5BanBnXkFtZTcwNzUyNDk5MQ@@._V1_SX300.jpg"}
+{"album"=>{"album_type"=>"single", "artists"=>[{"external_urls"=>{"spotify"=>"https://open.spotify.com/artist/7KUri7klyLaIFXLcuuOMCd"}, "href"=>"https://api.spotify.com/v1/artists/7KUri7klyLaIFXLcuuOMCd", "id"=>"7KUri7klyLaIFXLcuuOMCd", "name"=>"Stargate", "type"=>"artist", "uri"=>"spotify:artist:7KUri7klyLaIFXLcuuOMCd"}, {"external_urls"=>{"spotify"=>"https://open.spotify.com/artist/1KCSPY1glIKqW2TotWuXOR"}, "href"=>"https://api.spotify.com/v1/artists/1KCSPY1glIKqW2TotWuXOR",...
+```
+
+This is still a lot of data. 
+
+You probably want to dig deeper to get more fine grained information. Your `@results` contains both hashes and arrays, nested inside each other. You can get information out of `@results` by using the keys of the hashes, and positions in arrays. You might like this [tutorial](https://learnrubythehardway.org/book/ex39.html) to learn more about getting information out of hashes and arrays.
+
+For example, if I wanted to get the name of the second artist of the first album in results:
+
+```
+(byebug)  @results[0]["album"]["artists"][1]["name"]
+"P!nk"
+```
+
+You can also try using the debugger to inspect objects you have saved in your database. For example, when you are making your favourite song list, you have a Favourite model. In your debugger you can call `inspect` on any of your Favourite objects. 
+
+```
+(byebug) Favourite.last.inspect
+  Favourite Load (0.2ms)  SELECT  "favourites".* FROM "favourites"  ORDER BY "favourites"."id" DESC LIMIT 1
+"#<Favourite id: 4, person: \"tracy\", spotify_id: \"3aWhZ1zeqy1kdjXiyMh22T\", name: \"What They Want\", preview_url: \"https://p.scdn.co/mp3-preview/ddbb456112c441e4d239...\", created_at: \"2017-05-25 22:29:55\", updated_at: \"2017-05-25 22:29:55\">"
 (byebug)
-```
-
-(The first item in an array is at position 0, to get the second item in an array, you would use `@results[1]`, and so on)
-
-Go further and retrieve individual attributes of the `@results`
-
-```
-(byebug) @results[0]["Poster"]
-"https://images-na.ssl-images-amazon.com/images/M/MV5BMTI2NDY4Mzc1Nl5BMl5BanBnXkFtZTcwNzUyNDk5MQ@@._V1_SX300.jpg"
-(byebug)
-```
-
-Try using the debugger to inspect objects you have saved in your database. For example, when you are making your favourite movie list, you have a Favourite model. In your debugger you can call `inspect` on any of your Favourite objects. 
-
-```
-(byebug) Favourite.first.inspect
-  CACHE (0.0ms)  SELECT  "favourites".* FROM "favourites"  ORDER BY "favourites"."id" ASC LIMIT 1
-"#<Favourite id: 1, title: \"Layer Cake\", created_at: \"2017-01-26 21:59:50\", updated_at: \"2017-01-26 21:59:50\">"
 ```
