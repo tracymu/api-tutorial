@@ -30,9 +30,9 @@ This is a Ruby on Rails tutorial focusing on understanding and working with api'
 
 ### Production
 ```
-git add .
+$ git add .
 $ git commit -m "my first commit"
-git push heroku master
+$ git push heroku master
 ```
 
 Deployed at [rails-girls-api-tutorial.herokuapp.com](http://rails-girls-api-tutorial.herokuapp.com/)
