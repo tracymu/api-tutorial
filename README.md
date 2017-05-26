@@ -7,12 +7,12 @@ This is a Ruby on Rails tutorial focusing on understanding and working with api'
   - What is an API?
   - Why learn APIs?
   - Understanding APIs
-  - Create a Rails app using the [OMDB api](http://www.omdbapi.com/)
+  - Create a Rails app using the [Spotify api](http://api.spotify.com/)
 - [Compare favourite songs with a friend](http://rails-girls-api-tutorial.herokuapp.com/compare-favourite-songs.html)
   - Making a database
   - Integrating search
   - Comparing songs
-- [Try it again but in JavaScript](http://rails-girls-api-tutorial.herokuapp.com/omdb-javascript.html)
+- [Try it again but in JavaScript](http://rails-girls-api-tutorial.herokuapp.com/api-javascript.html)
   - Steps overview
   - Basic setup
   - Adding the form
