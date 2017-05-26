@@ -149,22 +149,23 @@ var results = JSON.parse(jsonEncodedString);
 
 ## Show the results
 
-Add an element where we can put the results into:
+Add an element we can put the results into. I'm going to make an empty list:
 
 ```html
     <div class="results">
+      <ul></ul>
     </div>
 ```
 
 Loop over the results from the API and make new HTML elements. This is the longer version of the code to try to show you everything that is happening:
 
 ```js
-      var results = data["Search"];
+      var results = data["tracks"]["items"];
       var resultsElement = $('.results');
       resultsElement.html("");
       for (var i = 0; i < results.length; i++) {
         var item = results[i];
-        var posterElement = $("<img>").attr("src", item["Poster"]);
+        var posterElement = $("<li>").text(item["name"]);
         resultsElement.append(posterElement);
       }
 ```
@@ -172,9 +173,9 @@ Loop over the results from the API and make new HTML elements. This is the longe
 But jQuery's convenient functions like `$.map` lets us write a much shorter version:
 
 ```js
-      $('.results').html(
-        $.map(data["Search"], function(item) {
-          return $("<img>").attr("src", item["Poster"]);
+      $('.results ul').html(
+        $.map(data["tracks"]["items"], function(item) {
+          return $("<li>").text(item["name"]);
         })
       );
 ```
@@ -182,7 +183,7 @@ But jQuery's convenient functions like `$.map` lets us write a much shorter vers
 In most modern web browsers, we can make it even shorter using Array's map method and an arrow function:
 
 ```js
-      $('.results').html(data["Search"].map(m => $("<img>").attr("src", m["Poster"])));
+      $('.results').html(data["tracks"]["items"].map(m => $("<li>").text(item["name"])));
 ```
 
 - ~~Set up an `index.html` file and an `index.js` file and run a web server locally~~
